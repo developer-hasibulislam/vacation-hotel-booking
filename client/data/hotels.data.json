@@ -1,0 +1,149 @@
+[
+  {
+    "name": "Staycity Aparthotels Deptford Bridge Station",
+    "content": "You can directly book the best price if your travel dates are available, all discounts are already included. In the following house description you will find all information about our listing.\n2-room terraced house on 2 levels. Comfortable and cosy furnishings: 1 room with 1 french bed and radio. Shower, sep. WC. Upper floor: (steep stair) living/dining room with 1 sofabed (110 cm, length 180 cm), TV. Exit to the balcony. Small kitchen (2 hot plates, oven",
+    "youTubeVideoURL": "https://youtu.be/oqNZOOWF8qM",
+    "bannerImages": [
+      "http://localhost:3000/img/gallery/1/5.png",
+      "http://localhost:3000/img/gallery/1/4.png",
+      "http://localhost:3000/img/gallery/1/2.png",
+      "http://localhost:3000/img/hotels/2.png"
+    ],
+    "galleryImages": [
+      "http://localhost:3000/img/gallery/1/5.png",
+      "http://localhost:3000/img/gallery/1/4.png",
+      "http://localhost:3000/img/gallery/1/2.png",
+      "http://localhost:3000/img/hotels/2.png",
+      "http://localhost:3000/img/gallery/1/5.png",
+      "http://localhost:3000/img/gallery/1/4.png",
+      "http://localhost:3000/img/gallery/1/2.png",
+      "http://localhost:3000/img/hotels/2.png"
+    ],
+    "featuredImages": [
+      "http://localhost:3000/img/hotels/2.png",
+      "http://localhost:3000/img/gallery/1/2.png",
+      "http://localhost:3000/img/gallery/1/4.png",
+      "http://localhost:3000/img/gallery/1/5.png"
+    ],
+    "location": "Ciutat Vella, Barcelona",
+    "mapLatitude": "23.6850° N",
+    "mapLongitude": "90.3563° E",
+    "surroundings": [
+      {
+        "surroundingTitle": "Education",
+        "surroundingDescription": [
+          {
+            "surroundingName": "Royal Pump Room Museum",
+            "surroundingContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+            "surroundingDistance": "0.5 KM",
+            "surroundingCountry": "Spain"
+          },
+          {
+            "surroundingName": "Leeds Bradford International Airport",
+            "surroundingContent": "You can reach Leeds Bradford International Airport in 20 minutes by car.",
+            "surroundingDistance": "20 KM",
+            "surroundingCountry": "Spain"
+          },
+          {
+            "surroundingName": "Harrogate Turkish Baths",
+            "surroundingContent": "You can reach Harrogate Turkish Baths in 2 minutes by car.",
+            "surroundingDistance": "0.1 KM",
+            "surroundingCountry": "Spain"
+          }
+        ]
+      },
+      {
+        "surroundingTitle": "Health",
+        "surroundingDescription": [
+          {
+            "surroundingName": "Royal Pump Room Museum",
+            "surroundingContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+            "surroundingDistance": "0.5 KM",
+            "surroundingCountry": "Spain"
+          },
+          {
+            "surroundingName": "Leeds Bradford International Airport",
+            "surroundingContent": "You can reach Leeds Bradford International Airport in 20 minutes by car.",
+            "surroundingDistance": "20 KM",
+            "surroundingCountry": "Spain"
+          },
+          {
+            "surroundingName": "Harrogate Turkish Baths",
+            "surroundingContent": "You can reach Harrogate Turkish Baths in 2 minutes by car.",
+            "surroundingDistance": "0.1 KM",
+            "surroundingCountry": "Spain"
+          }
+        ]
+      },
+      {
+        "surroundingTitle": "Transportation",
+        "surroundingDescription": [
+          {
+            "surroundingName": "Royal Pump Room Museum",
+            "surroundingContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+            "surroundingDistance": "0.5 KM",
+            "surroundingCountry": "Spain"
+          },
+          {
+            "surroundingName": "Leeds Bradford International Airport",
+            "surroundingContent": "You can reach Leeds Bradford International Airport in 20 minutes by car.",
+            "surroundingDistance": "20 KM",
+            "surroundingCountry": "Spain"
+          },
+          {
+            "surroundingName": "Harrogate Turkish Baths",
+            "surroundingContent": "You can reach Harrogate Turkish Baths in 2 minutes by car.",
+            "surroundingDistance": "0.1 KM",
+            "surroundingCountry": "Spain"
+          }
+        ]
+      }
+    ],
+
+    "price": {
+      "regularPrice": 420,
+      "extraPrice": 20,
+      "serviceFee": 10
+    },
+    "checkInTime": "16:00",
+    "checkOutTime": "12:00",
+    "minimumAdvanceReservation": "1",
+    "minimumDayStay": "1",
+    "attributes": {
+      "facilities": [
+        {
+          "facilityName": "Media & Technology",
+          "facilityLists": [
+            "TV",
+            "Kitchen",
+            "Shower",
+            "Balcony",
+            "Parking",
+            "Air conditioning",
+            "Smoking allowed",
+            "Pets allowed"
+          ]
+        }
+      ],
+      "facts": [
+        {
+          "factName": "Check-in/Check-out",
+          "factContent": [
+            {
+              "factContentName": "Check-in from",
+              "factContentValue": "16:00"
+            },
+            {
+              "factContentName": "Check-out until",
+              "factContentValue": "12:00"
+            },
+            {
+              "factContentName": "Re-open until",
+              "factContentValue": "00:00"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
