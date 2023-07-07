@@ -33,29 +33,64 @@ const hotelSchema = new mongoose.Schema(
       type: String,
       default: "N/A",
     },
-    surroundings: [
+    educationData: [
       {
-        surroundingTitle: String,
-        surroundingDescription: [
-          {
-            surroundingName: {
-              type: String,
-              default: "N/A",
-            },
-            surroundingContent: {
-              type: String,
-              default: "N/A",
-            },
-            surroundingDistance: {
-              type: String,
-              default: "N/A",
-            },
-            surroundingCountry: {
-              type: String,
-              default: "N/A",
-            },
-          },
-        ],
+        beachName: {
+          type: String,
+          default: "N/A",
+        },
+        beachContent: {
+          type: String,
+          default: "N/A",
+        },
+        beachDistance: {
+          type: String,
+          default: "N/A",
+        },
+        beachCountry: {
+          type: String,
+          default: "N/A",
+        },
+      },
+    ],
+    healthData: [
+      {
+        beachName: {
+          type: String,
+          default: "N/A",
+        },
+        beachContent: {
+          type: String,
+          default: "N/A",
+        },
+        beachDistance: {
+          type: String,
+          default: "N/A",
+        },
+        beachCountry: {
+          type: String,
+          default: "N/A",
+        },
+      },
+    ],
+    transportationData: [
+      {
+        beachName: {
+          type: String,
+          default: "N/A",
+        },
+        beachContent: {
+          type: String,
+          default: "N/A",
+        },
+        beachDistance: {
+          type: String,
+          default: "N/A",
+        },
+        beachCountry: {
+          type: String,
+          default: "N/A",
+        },
       },
     ],
 

@@ -1,16 +1,46 @@
-import React, { useState } from 'react';
+/**
+ * Title: Education.jsx
+ * Author: Hasibul Islam
+ * Portfolio: https://developer-hasibulislam.vercel.app
+ * Linkedin: https://www.linkedin.com/in/developer-hasibulislam
+ * Date: 07, July 2023
+ */
+
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addHotel } from "../../../../../features/hotel/hotelSlice";
 
 const Education = () => {
-  const [items, setItems] = useState([{ id: 1 }]);
+  const dispatch = useDispatch();
+  const [items, setItems] = useState([{ id: Date.now() }]);
+  const [educationData, setEducationData] = useState([
+    {
+      id: Date.now(),
+      beachName: "",
+      beachContent: "",
+      beachDistance: "",
+      beachCountry: "",
+    },
+  ]);
 
   const addItem = () => {
     const newItem = { id: Date.now() };
     setItems([...items, newItem]);
+    setEducationData([...educationData, newItem]);
+    dispatch(addHotel({ educationData: [...educationData] }));
   };
 
   const deleteItem = (id) => {
     const updatedItems = items.filter((item) => item.id !== id);
     setItems(updatedItems);
+    const updatedEducationData = educationData.filter((item) => item.id !== id);
+    setEducationData(updatedEducationData);
+  };
+
+  const handleChange = (index, field, value) => {
+    const updatedEducationData = [...educationData];
+    updatedEducationData[index][field] = value;
+    setEducationData(updatedEducationData);
   };
 
   return (
@@ -28,33 +58,62 @@ const Education = () => {
             </tr>
           </thead>
           <tbody>
-            {items.map((item) => (
+            {items.map((item, index) => (
               <tr key={item.id}>
                 <td className="col-2">
-                  <div className="form-input ">
-                    <input type="text" required />
+                  <div className="form-input">
+                    <input
+                      type="text"
+                      value={educationData[index].beachName}
+                      onChange={(e) =>
+                        handleChange(index, "beachName", e.target.value)
+                      }
+                      required
+                    />
                     <label className="lh-1 text-16 text-light-1">
                       Sunny beach
                     </label>
                   </div>
                 </td>
                 <td className="col-6">
-                  <div className="form-input ">
-                    <textarea required rows={5} defaultValue={''} />
+                  <div className="form-input">
+                    <textarea
+                      value={educationData[index].beachContent}
+                      onChange={(e) =>
+                        handleChange(index, "beachContent", e.target.value)
+                      }
+                      required
+                      rows={5}
+                      defaultValue={""}
+                    />
                     <label className="lh-1 text-16 text-light-1">Content</label>
                   </div>
                 </td>
                 <td className="col-2">
-                  <div className="form-input ">
-                    <input type="text" required />
+                  <div className="form-input">
+                    <input
+                      type="text"
+                      value={educationData[index].beachDistance}
+                      onChange={(e) =>
+                        handleChange(index, "beachDistance", e.target.value)
+                      }
+                      required
+                    />
                     <label className="lh-1 text-16 text-light-1">
                       Sunny beach
                     </label>
                   </div>
                 </td>
                 <td className="col-2">
-                  <div className="form-input ">
-                    <input type="text" required />
+                  <div className="form-input">
+                    <input
+                      type="text"
+                      value={educationData[index].beachCountry}
+                      onChange={(e) =>
+                        handleChange(index, "beachCountry", e.target.value)
+                      }
+                      required
+                    />
                     <label className="lh-1 text-16 text-light-1">
                       Select Country
                     </label>

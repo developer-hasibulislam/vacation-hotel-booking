@@ -28,82 +28,52 @@
     "location": "Ciutat Vella, Barcelona",
     "mapLatitude": "23.6850° N",
     "mapLongitude": "90.3563° E",
-    "surroundings": [
+    "educationData": [
       {
-        "surroundingTitle": "Education",
-        "surroundingDescription": [
-          {
-            "surroundingName": "Royal Pump Room Museum",
-            "surroundingContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
-            "surroundingDistance": "0.5 KM",
-            "surroundingCountry": "Spain"
-          },
-          {
-            "surroundingName": "Leeds Bradford International Airport",
-            "surroundingContent": "You can reach Leeds Bradford International Airport in 20 minutes by car.",
-            "surroundingDistance": "20 KM",
-            "surroundingCountry": "Spain"
-          },
-          {
-            "surroundingName": "Harrogate Turkish Baths",
-            "surroundingContent": "You can reach Harrogate Turkish Baths in 2 minutes by car.",
-            "surroundingDistance": "0.1 KM",
-            "surroundingCountry": "Spain"
-          }
-        ]
+        "beachName": "Royal Pump Room Museum",
+        "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+        "beachDistance": "0.5 KM",
+        "beachCountry": "Spain"
       },
       {
-        "surroundingTitle": "Health",
-        "surroundingDescription": [
-          {
-            "surroundingName": "Royal Pump Room Museum",
-            "surroundingContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
-            "surroundingDistance": "0.5 KM",
-            "surroundingCountry": "Spain"
-          },
-          {
-            "surroundingName": "Leeds Bradford International Airport",
-            "surroundingContent": "You can reach Leeds Bradford International Airport in 20 minutes by car.",
-            "surroundingDistance": "20 KM",
-            "surroundingCountry": "Spain"
-          },
-          {
-            "surroundingName": "Harrogate Turkish Baths",
-            "surroundingContent": "You can reach Harrogate Turkish Baths in 2 minutes by car.",
-            "surroundingDistance": "0.1 KM",
-            "surroundingCountry": "Spain"
-          }
-        ]
-      },
-      {
-        "surroundingTitle": "Transportation",
-        "surroundingDescription": [
-          {
-            "surroundingName": "Royal Pump Room Museum",
-            "surroundingContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
-            "surroundingDistance": "0.5 KM",
-            "surroundingCountry": "Spain"
-          },
-          {
-            "surroundingName": "Leeds Bradford International Airport",
-            "surroundingContent": "You can reach Leeds Bradford International Airport in 20 minutes by car.",
-            "surroundingDistance": "20 KM",
-            "surroundingCountry": "Spain"
-          },
-          {
-            "surroundingName": "Harrogate Turkish Baths",
-            "surroundingContent": "You can reach Harrogate Turkish Baths in 2 minutes by car.",
-            "surroundingDistance": "0.1 KM",
-            "surroundingCountry": "Spain"
-          }
-        ]
+        "beachName": "Royal Pump Room Museum",
+        "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+        "beachDistance": "0.5 KM",
+        "beachCountry": "Spain"
       }
     ],
-
+    "healthData": [
+      {
+        "beachName": "Royal Pump Room Museum",
+        "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+        "beachDistance": "0.5 KM",
+        "beachCountry": "Spain"
+      },
+      {
+        "beachName": "Royal Pump Room Museum",
+        "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+        "beachDistance": "0.5 KM",
+        "beachCountry": "Spain"
+      }
+    ],
+    "transportationData": [
+      {
+        "beachName": "Royal Pump Room Museum",
+        "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+        "beachDistance": "0.5 KM",
+        "beachCountry": "Spain"
+      },
+      {
+        "beachName": "Royal Pump Room Museum",
+        "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+        "beachDistance": "0.5 KM",
+        "beachCountry": "Spain"
+      }
+    ],
     "price": {
       "regularPrice": 420,
-      "extraPrice": 20,
-      "serviceFee": 10
+      "extraPrice": true,
+      "serviceFee": true
     },
     "checkInTime": "16:00",
     "checkOutTime": "12:00",
