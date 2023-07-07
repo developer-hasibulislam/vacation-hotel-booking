@@ -8,6 +8,7 @@
 
 const {
   uploadImages,
+  deleteImage,
   addNewHotel,
   getHotelOrHotels,
   updateHotel,
@@ -17,6 +18,18 @@ const {
 exports.uploadImages = async (req, res, next) => {
   try {
     await uploadImages(req, res);
+  } catch (error) {
+    next(error);
+  } finally {
+    console.log(
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+    );
+  }
+};
+
+exports.deleteImage = async (req, res, next) => {
+  try {
+    await deleteImage(req, res);
   } catch (error) {
     next(error);
   } finally {

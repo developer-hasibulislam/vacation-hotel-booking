@@ -19,6 +19,14 @@ const hotelApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    // delete image
+    deleteImage: builder.mutation({
+      query: (filename) => ({
+        url: `/vendor/hotel/images/?filename=${filename}`,
+        method: "DELETE",
+      }),
+    }),
+
     // add new hotel
     addNewHotel: builder.mutation({
       query: (body) => ({
@@ -80,6 +88,7 @@ const hotelApi = apiSlice.injectEndpoints({
 
 export const {
   useUploadHotelImagesMutation,
+  useDeleteImageMutation,
   useAddNewHotelMutation,
   useGetAllHotelsQuery,
   useGetSingleHotelQuery,

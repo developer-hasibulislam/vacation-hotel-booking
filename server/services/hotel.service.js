@@ -6,6 +6,7 @@
  * Date: 04, July 2023
  */
 
+const fs = require("fs");
 const Hotel = require("../models/vendor/hotel.model");
 
 exports.uploadImages = async (req, res) => {
@@ -19,6 +20,22 @@ exports.uploadImages = async (req, res) => {
     acknowledgement: true,
     message: "Images uploaded successfully",
     files,
+  });
+};
+
+exports.deleteImage = async function ({ query }, res) {
+  fs.unlink(`./uploads/${query.filename}`, (err) => {
+    if (err) {
+      return res.status(400).json({
+        acknowledgement: true,
+        message: "Internal Error",
+      });
+    } else {
+      return res.status(200).json({
+        acknowledgement: true,
+        message: "Image deleted successfully",
+      });
+    }
   });
 };
 

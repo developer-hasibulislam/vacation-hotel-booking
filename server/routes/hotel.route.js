@@ -10,6 +10,7 @@ const express = require("express");
 const upload = require("../middlewares/upload.middleware");
 const {
   uploadImages,
+  deleteImage,
   addNewHotel,
   getHotelOrHotels,
   updateHotel,
@@ -27,7 +28,8 @@ router
       { name: "featuredImages" },
     ]),
     uploadImages
-  );
+  )
+  .delete(deleteImage);
 
 router
   .route("/hotel")

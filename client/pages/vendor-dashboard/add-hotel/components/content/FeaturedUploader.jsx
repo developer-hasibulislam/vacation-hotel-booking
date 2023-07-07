@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useDeletePhotoMutation,
-  useUploadPhotosMutation,
-} from "../../../../../features/upload/uploadApi";
 import { addHotel } from "../../../../../features/hotel/hotelSlice";
+import {
+  useDeleteImageMutation,
+  useUploadHotelImagesMutation,
+} from "../../../../../features/hotel/hotelApi";
 
 const FeaturedUploader = () => {
   const dispatch = useDispatch();
-  const [uploadFeaturedImages, { data }] = useUploadPhotosMutation();
-  const [deleteImage] = useDeletePhotoMutation();
+  const [uploadFeaturedImages, { data }] = useUploadHotelImagesMutation();
+  const [deleteImage] = useDeleteImageMutation();
   const { featuredImages } = useSelector((state) => state.hotel.hotel);
   const [stateImages, setStateImages] = useState([]);
 
   useEffect(() => {
     if (data?.acknowledgement) {
-      const images = data?.files?.featuredImages?.map((item) => item.filename);
+      const images = data?.files?.featuredImages?.map((item) => item);
 
       if (images && images.length > 0) {
         const updatedImages = [...stateImages, ...images];
@@ -89,7 +89,7 @@ const FeaturedUploader = () => {
     const removedImage = stateImagesCopy.splice(index, 1);
     setStateImages(stateImagesCopy);
     dispatch(addHotel({ featuredImages: stateImagesCopy }));
-    deleteImage(removedImage[0].replace(/^uploads\//, ""));
+    deleteImage(removedImage[0]);
   };
 
   return (
