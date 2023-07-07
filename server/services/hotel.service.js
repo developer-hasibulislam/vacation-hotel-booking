@@ -44,7 +44,7 @@ exports.getHotelOrHotels = async (req, res) => {
   } else if (req.query.page) {
     // get hotels by page
     const page = parseInt(req.query.page);
-    const limit = 1;
+    const limit = 10; // default limit = 10
 
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
