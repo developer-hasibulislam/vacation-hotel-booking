@@ -29,32 +29,42 @@
 ### Get Single Hotel
 
 ```http
-  GET /api/vendor/hotel/${id}
+  GET /api/vendor/hotel/?id=${id}
 ```
 
 | Parameter | Type     | Description                        |
 | :-------- | :------- | :--------------------------------- |
-| `id`      | `string` | **Required**. Id of hotel to fetch |
+| `id`      | `objectID` | **Required**. Id of hotel to fetch |
+
+### Get Single Hotel by Pagination
+
+```http
+  GET /api/vendor/hotel/?page=1
+```
+
+| Parameter | Type     | Description                        |
+| :-------- | :------- | :--------------------------------- |
+| `page`      | `number` | **Required**. Id of hotel to fetch |
 
 ### Update Hotel
 
 ```http
-  PATCH /api/vendor/hotel/${id}
+  PATCH /api/vendor/hotel/?=id${id}
 ```
 
 | Parameter | Type     | Description                         |
 | :-------- | :------- | :---------------------------------- |
-| `id`      | `string` | **Required**. Id of hotel to update |
+| `id`      | `objectID` | **Required**. Id of hotel to update |
 
 ### Delete Single Hotel
 
 ```http
-  DELETE /api/vendor/hotel/${id}
+  DELETE /api/vendor/hotel/?id=${id}
 ```
 
 | Parameter | Type     | Description                         |
 | :-------- | :------- | :---------------------------------- |
-| `id`      | `string` | **Required**. Id of hotel to remove |
+| `id`      | `objectID` | **Required**. Id of hotel to remove |
 
 ### Delete Multiple Hotel
 
@@ -65,6 +75,3 @@
 | Parameter | Type   | Description             |
 | :-------- | :----- | :---------------------- |
 | `null`    | `null` | removed selected hotels |
-
-Photo uploading Pending
-Db to UI intermigration Pending..
