@@ -10,6 +10,15 @@ import apiSlice from "../api/apiSlice";
 
 const hotelApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    // upload hotel images
+    uploadHotelImages: builder.mutation({
+      query: (formData) => ({
+        url: "/vendor/hotel/images",
+        method: "POST",
+        body: formData,
+      }),
+    }),
+
     // add new hotel
     addNewHotel: builder.mutation({
       query: (body) => ({
@@ -28,14 +37,20 @@ const hotelApi = apiSlice.injectEndpoints({
 
     // get single hotel
     getSingleHotel: builder.query({
-      query: (id) => `/hotel/${id}`,
+      query: (id) => `/hotel/?id=${id}`,
+      providesTags: ["Hotel"],
+    }),
+
+    // get hotel by pagination
+    getHotelByPagination: builder.query({
+      query: (page) => `/vendor/hotel/?page=${page}`,
       providesTags: ["Hotel"],
     }),
 
     // update hotel
     updateHotel: builder.mutation({
-      query: (body) => ({
-        url: "/vendor/hotel",
+      query: ({ id, body }) => ({
+        url: `/vendor/hotel/?i=${id}`,
         method: "PATCH",
         body,
       }),
@@ -55,7 +70,7 @@ const hotelApi = apiSlice.injectEndpoints({
     // delete single hotel
     deleteSingleHotel: builder.mutation({
       query: (id) => ({
-        url: `/vendor/hotel/${id}`,
+        url: `/vendor/hotel/?id=${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Hotel"],
@@ -64,9 +79,11 @@ const hotelApi = apiSlice.injectEndpoints({
 });
 
 export const {
+  useUploadHotelImagesMutation,
   useAddNewHotelMutation,
   useGetAllHotelsQuery,
   useGetSingleHotelQuery,
+  useGetHotelByPaginationQuery,
   useUpdateHotelMutation,
   useDeleteMultipleHotelsMutation,
   useDeleteSingleHotelMutation,
