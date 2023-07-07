@@ -8,12 +8,18 @@
 
 const express = require("express");
 const upload = require("../middlewares/upload.middleware");
-const { uploadImages } = require("../controllers/hotel.controller");
+const {
+  uploadImages,
+  addNewHotel,
+  getHotelOrHotels,
+  updateHotel,
+  deleteHotelOrHotels,
+} = require("../controllers/hotel.controller");
 
 const router = express.Router();
 
 router
-  .route("/images")
+  .route("/hotel/images")
   .post(
     upload.fields([
       { name: "bannerImages" },
@@ -22,5 +28,12 @@ router
     ]),
     uploadImages
   );
+
+router
+  .route("/hotel")
+  .post(addNewHotel)
+  .get(getHotelOrHotels)
+  .patch(updateHotel)
+  .delete(deleteHotelOrHotels);
 
 module.exports = router;

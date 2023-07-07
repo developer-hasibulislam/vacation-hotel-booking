@@ -31,30 +31,68 @@ exports.addNewHotel = async ({ body }, res) => {
   });
 };
 
-exports.getAllHotels = async (_, res) => {
-  const hotels = await Hotel.find().select("_id");
-  const total = await Hotel.countDocuments();
+exports.getHotelOrHotels = async (req, res) => {
+  if (req.query.id) {
+    // get single hotel
+    const hotel = await Hotel.findById(req.query.id);
 
-  return res.status(200).json({
-    acknowledgement: true,
-    message: "Hotels fetched successfully",
-    total,
-    hotels,
-  });
+    return res.status(200).json({
+      acknowledgement: true,
+      message: "Hotel fetched successfully",
+      hotel,
+    });
+  } else if (req.query.page) {
+    // get hotels by page
+    const page = parseInt(req.query.page);
+    const limit = 1;
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    const hotels = await Hotel.find()
+      .sort({ updatedAt: -1 })
+      .skip(startIndex)
+      .limit(limit);
+    const total = await Hotel.countDocuments();
+
+    const pagination = {};
+
+    if (endIndex < total) {
+      pagination.next = {
+        page: page + 1,
+        limit: limit,
+      };
+    }
+
+    if (startIndex > 0) {
+      pagination.previous = {
+        page: page - 1,
+        limit: limit,
+      };
+    }
+
+    res.send({
+      acknowledgement: true,
+      message: "Hotels fetched successfully",
+      hotels,
+      pagination,
+    });
+  } else {
+    // get all hotels
+    const hotels = await Hotel.find();
+    const total = await Hotel.countDocuments();
+
+    return res.status(200).json({
+      acknowledgement: true,
+      message: "Hotels fetched successfully",
+      total,
+      hotels,
+    });
+  }
 };
 
-exports.getSingleHotel = async ({ params }, res) => {
-  const hotel = await Hotel.findById(params.id);
-
-  return res.status(200).json({
-    acknowledgement: true,
-    message: "Hotel fetched successfully",
-    hotel,
-  });
-};
-
-exports.updateHotel = async ({ params, body }, res) => {
-  await Hotel.findByIdAndUpdate(params.id, body);
+exports.updateHotel = async ({ query, body }, res) => {
+  await Hotel.findByIdAndUpdate(query.id, body);
 
   return res.status(200).json({
     acknowledgement: true,
@@ -62,20 +100,20 @@ exports.updateHotel = async ({ params, body }, res) => {
   });
 };
 
-exports.deleteMultipleHotels = async ({ body }, res) => {
-  await Hotel.deleteMany({ _id: { $in: body } });
+exports.deleteHotelOrHotels = async (req, res) => {
+  if (req.query.id) {
+    await Hotel.findByIdAndDelete(req.query.id);
 
-  return res.status(200).json({
-    acknowledgement: true,
-    message: "Hotels deleted successfully",
-  });
-};
+    return res.status(200).json({
+      acknowledgement: true,
+      message: "Hotel deleted successfully",
+    });
+  } else {
+    await Hotel.deleteMany({ _id: { $in: req.body } });
 
-exports.deleteHotel = async ({ params }, res) => {
-  await Hotel.findByIdAndDelete(params.id);
-
-  return res.status(200).json({
-    acknowledgement: true,
-    message: "Hotel deleted successfully",
-  });
+    return res.status(200).json({
+      acknowledgement: true,
+      message: "Hotels deleted successfully",
+    });
+  }
 };

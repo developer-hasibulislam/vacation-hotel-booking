@@ -37,7 +37,7 @@ app.use(
 app.use(express.json());
 
 /* router level connections */
-app.use("/api/hotel", hotelRouter);
+app.use("/api/vendor", hotelRouter);
 
 /* global error handler */
 app.use(error);

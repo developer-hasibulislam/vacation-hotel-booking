@@ -9,11 +9,9 @@
 const {
   uploadImages,
   addNewHotel,
-  getAllHotels,
-  getSingleHotel,
+  getHotelOrHotels,
   updateHotel,
-  deleteHotel,
-  deleteMultipleHotels,
+  deleteHotelOrHotels,
 } = require("../services/hotel.service");
 
 exports.uploadImages = async (req, res, next) => {
@@ -40,21 +38,9 @@ exports.addNewHotel = async (req, res, next) => {
   }
 };
 
-exports.getAllHotels = async (req, res, next) => {
+exports.getHotelOrHotels = async (req, res, next) => {
   try {
-    await getAllHotels(req, res);
-  } catch (error) {
-    next(error);
-  } finally {
-    console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
-    );
-  }
-};
-
-exports.getSingleHotel = async (req, res, next) => {
-  try {
-    await getSingleHotel(req, res);
+    await getHotelOrHotels(req, res);
   } catch (error) {
     next(error);
   } finally {
@@ -76,21 +62,9 @@ exports.updateHotel = async (req, res, next) => {
   }
 };
 
-exports.deleteMultipleHotels = async (req, res, next) => {
+exports.deleteHotelOrHotels = async (req, res, next) => {
   try {
-    await deleteMultipleHotels(req, res);
-  } catch (error) {
-    next(error);
-  } finally {
-    console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
-    );
-  }
-};
-
-exports.deleteHotel = async (req, res, next) => {
-  try {
-    await deleteHotel(req, res);
+    await deleteHotelOrHotels(req, res);
   } catch (error) {
     next(error);
   } finally {
