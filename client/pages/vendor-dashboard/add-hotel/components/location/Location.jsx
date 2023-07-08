@@ -1,15 +1,27 @@
-import { useDispatch } from "react-redux";
-import { addHotel} from "../../../../../features/hotel/hotelSlice";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addHotel } from "../../../../../features/hotel/hotelSlice";
 
 const Location = () => {
   const dispatch = useDispatch();
+  const { hotel } = useSelector((state) => state.hotel);
+  const [location, setLocation] = useState(hotel?.location || "");
+  const [mapLatitude, setMapLatitude] = useState(hotel?.mapLatitude || "");
+  const [mapLongitude, setMapLongitude] = useState(hotel?.mapLongitude || "");
+
   return (
     <div className="row x-gap-20 y-gap-20">
       <div className="col-12">
         <div className="form-input ">
-          <input type="text" 
-          onChange={(e) => dispatch(addHotel({ location: e.target.value }))}
-          required />
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => {
+              setLocation(e.target.value);
+              dispatch(addHotel({ location: e.target.value }));
+            }}
+            required
+          />
           <label className="lh-1 text-16 text-light-1">Location*</label>
         </div>
       </div>
@@ -21,17 +33,29 @@ const Location = () => {
       </div> */}
       <div className="col-lg-6 col-md-6">
         <div className="form-input ">
-          <input type="text" 
-          onChange={(e) => dispatch(addHotel({ mapLatitude: e.target.value }))}
-          required />
+          <input
+            type="text"
+            value={mapLatitude}
+            onChange={(e) => {
+              setMapLatitude(e.target.value);
+              dispatch(addHotel({ mapLatitude: e.target.value }));
+            }}
+            required
+          />
           <label className="lh-1 text-16 text-light-1">Map Latitude</label>
         </div>
       </div>
       <div className="col-lg-6 col-md-6">
         <div className="form-input ">
-          <input type="text"
-          onChange={(e) => dispatch(addHotel({ mapLongitude: e.target.value }))}
-          required />
+          <input
+            type="text"
+            value={mapLongitude}
+            onChange={(e) => {
+              setMapLongitude(e.target.value);
+              dispatch(addHotel({ mapLongitude: e.target.value }));
+            }}
+            required
+          />
           <label className="lh-1 text-16 text-light-1">Map Longitude</label>
         </div>
       </div>
