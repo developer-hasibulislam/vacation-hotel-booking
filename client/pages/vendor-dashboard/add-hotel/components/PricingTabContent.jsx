@@ -1,3 +1,11 @@
+/**
+ * Title: PricingTabContent.jsx
+ * Author: Hasibul Islam
+ * Portfolio: https://developer-hasibulislam.vercel.app
+ * Linkedin: https://www.linkedin.com/in/developer-hasibulislam
+ * Date: 08, July 2023
+ */
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHotel } from "../../../../features/hotel/hotelSlice";
