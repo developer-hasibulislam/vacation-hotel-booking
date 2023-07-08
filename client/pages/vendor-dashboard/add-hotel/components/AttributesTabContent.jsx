@@ -32,7 +32,16 @@ const AttributesTabContent = () => {
     },
   ];
 
-  const [checkedItems, setCheckedItems] = useState([]);
+  const defaultCheckedItems = sections.map((section) => {
+    return section.items.map((item) => {
+      const foundItem = hotel.attributes?.find(
+        (attr) => attr.title === section.title && attr.items.includes(item)
+      );
+      return foundItem ? true : false;
+    });
+  });
+
+  const [checkedItems, setCheckedItems] = useState(defaultCheckedItems);
 
   const handleCheckboxChange = (sectionIndex, itemIndex) => {
     const updatedCheckedItems = [...checkedItems];
@@ -40,14 +49,14 @@ const AttributesTabContent = () => {
     updatedCheckedItems[sectionIndex][itemIndex] =
       !updatedCheckedItems[sectionIndex][itemIndex];
     setCheckedItems(updatedCheckedItems);
-  };
 
-  const handleSaveChanges = () => {
+    // Dispatch the addHotel action with the updated checked sections
     const checkedSections = sections
       .map((section, sectionIndex) => {
         const checkedItemsInSection = section.items.filter((_, itemIndex) => {
           return (
-            checkedItems[sectionIndex] && checkedItems[sectionIndex][itemIndex]
+            updatedCheckedItems[sectionIndex] &&
+            updatedCheckedItems[sectionIndex][itemIndex]
           );
         });
         if (checkedItemsInSection.length > 0) {
@@ -59,9 +68,11 @@ const AttributesTabContent = () => {
 
     if (checkedSections.length) {
       dispatch(addHotel({ attributes: checkedSections }));
-
-      addNewHotel(hotel);
     }
+  };
+
+  const handleSaveChanges = () => {
+    addNewHotel(hotel);
   };
 
   return (
