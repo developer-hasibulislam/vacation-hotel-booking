@@ -17,11 +17,6 @@ const hotelSchema = new mongoose.Schema(
     bannerImages: [String],
     galleryImages: [String],
     featuredImages: [String],
-    status: {
-      type: String,
-      enum: ["pending", "confirmed", "rejected"],
-      default: "pending",
-    },
 
     // 2. Location Part
     location: String, // required
@@ -98,42 +93,55 @@ const hotelSchema = new mongoose.Schema(
     price: {
       regularPrice: Number, // required
       extraPrice: {
-        type: Number,
-        default: 0,
+        type: Boolean,
+        default: false,
       },
       serviceFee: {
-        type: Number,
-        default: 0,
+        type: Boolean,
+        default: false,
       },
     },
-    checkInTime: String, // required
-    checkOutTime: String, // required
-    minimumAdvanceReservation: Number, // required
-    minimumDaysStay: Number, // required
+    checkInTime: {
+      type: String,
+      default: "N/A",
+    },
+    checkOutTime: {
+      type: String,
+      default: "N/A",
+    },
+    minimumAdvanceReservation: {
+      type: Number,
+      default: 0,
+    },
+    minimumDaysStay: {
+      type: Number,
+      default: 0,
+    },
 
     // 4. Attributes Part
-    attributes: {
-      facilities: [
-        // required
-        {
-          facilityName: String,
-          facilityLists: [String],
+    attributes: [
+      {
+        title: {
+          type: String,
+          default: "N/A",
         },
-      ],
-      facts: [
-        {
-          factName: String,
-          faceContent: [
-            {
-              factContentName: String, // required
-              factContentValue: {
-                type: String,
-                default: "N/A",
-              },
-            },
-          ],
+        items: {
+          type: [String],
+          default: ["N/A"],
         },
-      ],
+      },
+    ],
+
+    // 5. Requiring State/Status
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "rejected"],
+      default: "pending",
+    },
+    state: {
+      type: String,
+      enum: ["active", "inactive"],
+      default: "active",
     },
   },
   { timestamps: true }

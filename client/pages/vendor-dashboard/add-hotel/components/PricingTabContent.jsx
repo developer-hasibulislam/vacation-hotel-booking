@@ -11,8 +11,8 @@ const PricingTabContent = () => {
     serviceFee: false,
     checkInTime: "",
     checkOutTime: "",
-    minimumAdvanceReservation: "",
-    minimumDayStay: "",
+    minimumAdvanceReservation: 0,
+    minimumDayStay: 0,
   });
 
   useEffect(() => {
@@ -66,16 +66,17 @@ const PricingTabContent = () => {
       <form>
         <div className="row x-gap-20 y-gap-20">
           <div className="col-12">
-            <div className="text-18 fw-500 mb-10">Pricing</div>
+            <div className="text-18 fw-500 mb-10">Pricing*</div>
             <div className="form-input">
               <input
-                type="text"
+                type="number"
+                step={0.01}
                 name="regularPrice"
                 value={formData.regularPrice}
                 onChange={handleChange}
                 required
               />
-              <label className="lh-1 text-16 text-light-1">Hotel Price</label>
+              <label className="lh-1 text-16 text-light-1">Hotel Price*</label>
             </div>
 
             <div className="d-flex mt-20">
@@ -152,7 +153,7 @@ const PricingTabContent = () => {
           <div className="col-md-6">
             <div className="form-input">
               <input
-                type="text"
+                type="number"
                 name="minimumAdvanceReservation"
                 value={formData.minimumAdvanceReservation}
                 onChange={handleChange}
@@ -167,7 +168,7 @@ const PricingTabContent = () => {
           <div className="col-md-6">
             <div className="form-input">
               <input
-                type="text"
+                type="number"
                 name="minimumDayStay"
                 value={formData.minimumDayStay}
                 onChange={handleChange}

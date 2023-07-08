@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addHotel } from "../../../../features/hotel/hotelSlice";
+import { useAddNewHotelMutation } from "../../../../features/hotel/hotelApi";
 
 const AttributesTabContent = () => {
   const dispatch = useDispatch();
+  const { hotel } = useSelector((state) => state.hotel);
+  const [addNewHotel, { isLoading }] = useAddNewHotelMutation();
+
   const sections = [
     {
       title: "Property Type",
@@ -41,14 +45,11 @@ const AttributesTabContent = () => {
   const handleSaveChanges = () => {
     const checkedSections = sections
       .map((section, sectionIndex) => {
-        const checkedItemsInSection = section.items.filter(
-          (_, itemIndex) => {
-            return (
-              checkedItems[sectionIndex] &&
-              checkedItems[sectionIndex][itemIndex]
-            );
-          }
-        );
+        const checkedItemsInSection = section.items.filter((_, itemIndex) => {
+          return (
+            checkedItems[sectionIndex] && checkedItems[sectionIndex][itemIndex]
+          );
+        });
         if (checkedItemsInSection.length > 0) {
           return { ...section, items: checkedItemsInSection };
         }
@@ -56,8 +57,11 @@ const AttributesTabContent = () => {
       })
       .filter((section) => section !== null);
 
-    checkedSections.length &&
+    if (checkedSections.length) {
       dispatch(addHotel({ attributes: checkedSections }));
+
+      addNewHotel(hotel);
+    }
   };
 
   return (

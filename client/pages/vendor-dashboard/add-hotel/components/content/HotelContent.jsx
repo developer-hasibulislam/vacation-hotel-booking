@@ -13,7 +13,7 @@ const HotelContent = () => {
             onChange={(e) => dispatch(addHotel({ name: e.target.value }))}
             required
           />
-          <label className="lh-1 text-16 text-light-1">Hotel Name</label>
+          <label className="lh-1 text-16 text-light-1">Hotel Name*</label>
         </div>
       </div>
       {/* End Name */}
@@ -26,7 +26,7 @@ const HotelContent = () => {
             onChange={(e) => dispatch(addHotel({ content: e.target.value }))}
             defaultValue={""}
           />
-          <label className="lh-1 text-16 text-light-1">Content</label>
+          <label className="lh-1 text-16 text-light-1">Content*</label>
         </div>
       </div>
       {/* End Content */}
@@ -40,7 +40,7 @@ const HotelContent = () => {
             }
             required
           />
-          <label className="lh-1 text-16 text-light-1">Youtube Video</label>
+          <label className="lh-1 text-16 text-light-1">Youtube Video*</label>
         </div>
       </div>
       {/* End youtube Video */}

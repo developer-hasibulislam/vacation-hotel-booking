@@ -10,7 +10,7 @@ const Location = () => {
           <input type="text" 
           onChange={(e) => dispatch(addHotel({ location: e.target.value }))}
           required />
-          <label className="lh-1 text-16 text-light-1">Location</label>
+          <label className="lh-1 text-16 text-light-1">Location*</label>
         </div>
       </div>
       {/* <div className="col-12">

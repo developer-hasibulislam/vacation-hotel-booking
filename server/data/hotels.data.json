@@ -54,9 +54,27 @@
         "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
         "beachDistance": "0.5 KM",
         "beachCountry": "Spain"
+      },
+      {
+        "beachName": "Royal Pump Room Museum",
+        "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+        "beachDistance": "0.5 KM",
+        "beachCountry": "Spain"
       }
     ],
     "transportationData": [
+      {
+        "beachName": "Royal Pump Room Museum",
+        "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+        "beachDistance": "0.5 KM",
+        "beachCountry": "Spain"
+      },
+      {
+        "beachName": "Royal Pump Room Museum",
+        "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
+        "beachDistance": "0.5 KM",
+        "beachCountry": "Spain"
+      },
       {
         "beachName": "Royal Pump Room Museum",
         "beachContent": "You can reach Royal Pump Room Museum in 2 minutes by car.",
@@ -77,43 +95,21 @@
     },
     "checkInTime": "16:00",
     "checkOutTime": "12:00",
-    "minimumAdvanceReservation": "1",
-    "minimumDayStay": "1",
-    "attributes": {
-      "facilities": [
-        {
-          "facilityName": "Media & Technology",
-          "facilityLists": [
-            "TV",
-            "Kitchen",
-            "Shower",
-            "Balcony",
-            "Parking",
-            "Air conditioning",
-            "Smoking allowed",
-            "Pets allowed"
-          ]
-        }
-      ],
-      "facts": [
-        {
-          "factName": "Check-in/Check-out",
-          "factContent": [
-            {
-              "factContentName": "Check-in from",
-              "factContentValue": "16:00"
-            },
-            {
-              "factContentName": "Check-out until",
-              "factContentValue": "12:00"
-            },
-            {
-              "factContentName": "Re-open until",
-              "factContentValue": "00:00"
-            }
-          ]
-        }
-      ]
-    }
+    "minimumAdvanceReservation": 3,
+    "minimumDayStay": 2,
+    "attributes": [
+      {
+        "title": "Property Type",
+        "items": ["Apartments", "Boats", "Holiday Homes"]
+      },
+      {
+        "title": "Facilities",
+        "items": ["TV", "Kitchen", "Air Conditioning"]
+      },
+      {
+        "title": "Hotel Services",
+        "items": ["Boats"]
+      }
+    ]
   }
 ]
