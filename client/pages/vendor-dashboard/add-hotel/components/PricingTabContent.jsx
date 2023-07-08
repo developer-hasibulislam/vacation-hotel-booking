@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addHotel } from "../../../../features/hotel/hotelSlice";
 import { useEffect } from "react";
 
 const PricingTabContent = () => {
   const dispatch = useDispatch();
+  const { hotel } = useSelector((state) => state.hotel);
   const [formData, setFormData] = useState({
-    regularPrice: 0,
-    extraPrice: false,
-    serviceFee: false,
-    checkInTime: "",
-    checkOutTime: "",
-    minimumAdvanceReservation: 0,
-    minimumDayStay: 0,
+    regularPrice: hotel?.price?.regularPrice || 0,
+    extraPrice: hotel?.price?.extraPrice || false,
+    serviceFee: hotel?.price?.serviceFee || false,
+    checkInTime: hotel?.checkInTime || "N/A",
+    checkOutTime: hotel?.checkOutTime || "N/A",
+    minimumAdvanceReservation: hotel?.minimumAdvanceReservation || 0,
+    minimumDayStay: hotel?.minimumDayStay || 0,
   });
 
   useEffect(() => {

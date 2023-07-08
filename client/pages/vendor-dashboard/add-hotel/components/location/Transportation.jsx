@@ -20,10 +20,10 @@ const Transportation = () => {
     hotel?.transportationData || [
       {
         id: Date.now(),
-        beachName: "",
-        beachContent: "",
-        beachDistance: "",
-        beachCountry: "",
+        beachName: "N/A",
+        beachContent: "N/A",
+        beachDistance: "N/A",
+        beachCountry: "N/A",
       },
     ]
   );

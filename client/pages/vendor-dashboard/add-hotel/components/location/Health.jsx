@@ -18,10 +18,10 @@ const Health = () => {
     hotel?.healthData || [
       {
         id: Date.now(),
-        beachName: "",
-        beachContent: "",
-        beachDistance: "",
-        beachCountry: "",
+        beachName: "N/A",
+        beachContent: "N/A",
+        beachDistance: "N/A",
+        beachCountry: "N/A",
       },
     ]
   );

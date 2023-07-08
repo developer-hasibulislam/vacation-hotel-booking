@@ -5,9 +5,9 @@ import { addHotel } from "../../../../../features/hotel/hotelSlice";
 const Location = () => {
   const dispatch = useDispatch();
   const { hotel } = useSelector((state) => state.hotel);
-  const [location, setLocation] = useState(hotel?.location || "");
-  const [mapLatitude, setMapLatitude] = useState(hotel?.mapLatitude || "");
-  const [mapLongitude, setMapLongitude] = useState(hotel?.mapLongitude || "");
+  const [location, setLocation] = useState(hotel?.location || "Enter Location");
+  const [mapLatitude, setMapLatitude] = useState(hotel?.mapLatitude || "N/A");
+  const [mapLongitude, setMapLongitude] = useState(hotel?.mapLongitude || "N/A");
 
   return (
     <div className="row x-gap-20 y-gap-20">
