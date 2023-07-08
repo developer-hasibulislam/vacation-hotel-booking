@@ -7,7 +7,6 @@
  */
 
 const multer = require("multer");
-const path = require("path");
 
 const storage = multer.diskStorage({
   destination: "uploads",
@@ -20,7 +19,11 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (_, file, cb) => {
-  if (file.mimetype === "image/png" || file.mimetype === "image/jpeg") {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/svg+xml"
+  ) {
     cb(null, true);
   } else {
     cb(null, false);
