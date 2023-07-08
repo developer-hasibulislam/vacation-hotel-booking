@@ -38,7 +38,7 @@ const SearchFilter = () => {
   };
 
   return (
-    <div className="form-input w-100 position-relative">
+    <div className="form-input w-100 bg-light-3 position-relative">
       <input
         type="text"
         required

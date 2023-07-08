@@ -42,7 +42,7 @@ const IconUploader = () => {
             type="file"
             accept="image/svg+xml"
             onChange={handleIconChange}
-            required
+            className="bg-light-3"
           />
         </>
       ) : (
@@ -125,7 +125,7 @@ const index = () => {
             {/* Dynamic Attributes Starts */}
             <form className="bg-light-2 d-flex flex-lg-nowrap flex-wrap gap-3 justify-content-between w-100 mb-5">
               {/* new attribute title */}
-              <div className="form-input w-100">
+              <div className="form-input w-100 bg-light-3">
                 <input type="text" />
                 <label className="lh-1 text-16 text-light-1">
                   Attribute Title
@@ -134,7 +134,7 @@ const index = () => {
               {/* new attribute items */}
               <SearchFilter />
               {/* new attribute item */}
-              <div className="form-input w-100">
+              <div className="form-input w-100 bg-light-3">
                 <input type="text" required />
                 <label className="lh-1 text-16 text-light-1">
                   Attribute item

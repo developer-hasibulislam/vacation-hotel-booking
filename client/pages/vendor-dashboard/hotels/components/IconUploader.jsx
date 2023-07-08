@@ -39,6 +39,7 @@ const IconUploader = () => {
                 type="file"
                 accept="image/svg+xml"
                 onChange={handleIconChange}
+                className="bg-light-3"
               />
             </>
           ) : (
