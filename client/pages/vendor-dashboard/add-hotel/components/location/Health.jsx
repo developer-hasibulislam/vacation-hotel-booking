@@ -7,21 +7,24 @@
  */
 
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addHotel } from "../../../../../features/hotel/hotelSlice";
 
 const Health = () => {
   const dispatch = useDispatch();
-  const [items, setItems] = useState([{ id: Date.now() }]);
-  const [healthData, setHealthData] = useState([
-    {
-      id: Date.now(),
-      beachName: "",
-      beachContent: "",
-      beachDistance: "",
-      beachCountry: "",
-    },
-  ]);
+  const { hotel } = useSelector((state) => state.hotel);
+  const [items, setItems] = useState(hotel?.healthData || [{ id: Date.now() }]);
+  const [healthData, setHealthData] = useState(
+    hotel?.healthData || [
+      {
+        id: Date.now(),
+        beachName: "",
+        beachContent: "",
+        beachDistance: "",
+        beachCountry: "",
+      },
+    ]
+  );
 
   const addItem = () => {
     const newItem = { id: Date.now() };
@@ -34,6 +37,9 @@ const Health = () => {
     setItems(updatedItems);
     const updatedHealthData = healthData.filter((item) => item.id !== id);
     setHealthData(updatedHealthData);
+
+    // Update redux state
+    dispatch(addHotel({ healthData: updatedHealthData }));
   };
 
   const handleChange = (index, field, value) => {
