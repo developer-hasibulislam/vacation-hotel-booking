@@ -10,7 +10,7 @@ const BannerUploader = () => {
   const dispatch = useDispatch();
   const [uploadBannerImages, { data }] = useUploadHotelImagesMutation();
   const [deleteImage] = useDeleteImageMutation();
-  const { bannerImages } = useSelector((state) => state.hotel.hotel);
+  const { hotel } = useSelector((state) => state.hotel);
   const [stateImages, setStateImages] = useState([]);
 
   useEffect(() => {
@@ -88,11 +88,11 @@ const BannerUploader = () => {
     setImages(newImages);
 
     // remove state images
-    const stateImagesCopy = [...bannerImages];
+    const stateImagesCopy = [...hotel?.bannerImages];
     const removedImage = stateImagesCopy.splice(index, 1);
     setStateImages(stateImagesCopy);
     dispatch(addHotel({ bannerImages: stateImagesCopy }));
-    deleteImage(removedImage[0]);
+    deleteImage(removedImage[0].replace(/^http:\/\/localhost:8080\//, ""));
   };
 
   return (
@@ -120,7 +120,11 @@ const BannerUploader = () => {
       </div>
       {/* End uploader field */}
 
-      {images.map((image, index) => (
+      {/* Render images */}
+      {(hotel?.bannerImages?.length > 0
+        ? hotel?.bannerImages
+        : stateImages
+      ).map((image, index) => (
         <div className="col-auto" key={index}>
           <div className="d-flex ratio ratio-1:1 w-200">
             <img src={image} alt="image" className="img-ratio rounded-4" />

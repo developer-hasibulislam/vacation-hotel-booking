@@ -13,7 +13,9 @@ exports.uploadImages = async (req, res) => {
   const files = {};
 
   for (const field in req.files) {
-    files[field] = req.files[field].map((file) => file.filename);
+    files[field] = req.files[field].map(
+      (file) => `${req.protocol}://${req.get("host")}/${file.filename}`
+    );
   }
 
   return res.status(200).json({

@@ -11,7 +11,7 @@ const GalleryUploader = () => {
   const dispatch = useDispatch();
   const [uploadGalleryImages, { data }] = useUploadHotelImagesMutation();
   const [deleteImage] = useDeleteImageMutation();
-  const { galleryImages } = useSelector((state) => state.hotel.hotel);
+  const { hotel } = useSelector((state) => state.hotel);
   const [stateImages, setStateImages] = useState([]);
 
   useEffect(() => {
@@ -86,11 +86,11 @@ const GalleryUploader = () => {
     setImages(newImages);
 
     // remove state images
-    const stateImagesCopy = [...galleryImages];
+    const stateImagesCopy = [...hotel?.galleryImages];
     const removedImage = stateImagesCopy.splice(index, 1);
     setStateImages(stateImagesCopy);
     dispatch(addHotel({ galleryImages: stateImagesCopy }));
-    deleteImage(removedImage[0]);
+    deleteImage(removedImage[0].replace(/^http:\/\/localhost:8080\//, ""));
   };
 
   return (
@@ -118,7 +118,11 @@ const GalleryUploader = () => {
       </div>
       {/* End uploader field */}
 
-      {images.map((image, index) => (
+      {/* Render images */}
+      {(hotel?.galleryImages?.length > 0
+        ? hotel?.galleryImages
+        : stateImages
+      ).map((image, index) => (
         <div className="col-auto" key={index}>
           <div className="d-flex ratio ratio-1:1 w-200">
             <img src={image} alt="image" className="img-ratio rounded-4" />
