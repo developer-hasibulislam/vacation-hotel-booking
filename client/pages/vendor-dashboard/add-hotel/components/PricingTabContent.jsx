@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addHotel } from "../../../../features/hotel/hotelSlice";
 
 const PricingTabContent = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     regularPrice: 0,
     extraPrice: false,
@@ -35,7 +38,7 @@ const PricingTabContent = () => {
 
     const data = {
       price: {
-        regularPrice: parseInt(regularPrice),
+        regularPrice: parseInt(regularPrice) || 0,
         extraPrice,
         serviceFee,
       },
@@ -45,7 +48,15 @@ const PricingTabContent = () => {
       minimumDayStay,
     };
 
-    console.log(data); // You can modify this line to save or use the data as needed
+    dispatch(
+      addHotel({
+        price: data.price,
+        checkInTime,
+        checkOutTime,
+        minimumAdvanceReservation,
+        minimumDayStay,
+      })
+    );
   };
 
   return (
