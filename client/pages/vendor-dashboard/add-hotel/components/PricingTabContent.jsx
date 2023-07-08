@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addHotel } from "../../../../features/hotel/hotelSlice";
+import { useEffect } from "react";
 
 const PricingTabContent = () => {
   const dispatch = useDispatch();
@@ -14,18 +15,8 @@ const PricingTabContent = () => {
     minimumDayStay: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const inputValue = type === "checkbox" ? checked : value;
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: inputValue,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    // Dispatch the addHotel action whenever formData changes
     const {
       regularPrice,
       extraPrice,
@@ -38,30 +29,41 @@ const PricingTabContent = () => {
 
     const data = {
       price: {
-        regularPrice: parseInt(regularPrice) || 0,
+        regularPrice: parseInt(regularPrice),
         extraPrice,
         serviceFee,
       },
       checkInTime,
       checkOutTime,
-      minimumAdvanceReservation,
-      minimumDayStay,
+      minimumAdvanceReservation: parseInt(minimumAdvanceReservation),
+      minimumDayStay: parseInt(minimumDayStay),
     };
 
-    dispatch(
-      addHotel({
-        price: data.price,
-        checkInTime,
-        checkOutTime,
-        minimumAdvanceReservation,
-        minimumDayStay,
-      })
-    );
+    formData.regularPrice &&
+      dispatch(
+        addHotel({
+          price: data.price,
+          checkInTime,
+          checkOutTime,
+          minimumAdvanceReservation,
+          minimumDayStay,
+        })
+      );
+  }, [formData, dispatch]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === "checkbox" ? checked : value;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: inputValue,
+    }));
   };
 
   return (
     <div className="col-xl-9 col-lg-11">
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="row x-gap-20 y-gap-20">
           <div className="col-12">
             <div className="text-18 fw-500 mb-10">Pricing</div>
@@ -180,14 +182,14 @@ const PricingTabContent = () => {
         </div>
         {/* End row */}
 
-        <div className="col-md-12 d-inline-block mt-30">
+        {/* <div className="col-md-12 d-inline-block mt-30">
           <button
             type="submit"
             className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
           >
             Save Changes <div className="icon-arrow-top-right ml-15" />
           </button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

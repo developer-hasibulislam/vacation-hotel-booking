@@ -27,7 +27,6 @@ const Health = () => {
     const newItem = { id: Date.now() };
     setItems([...items, newItem]);
     setHealthData([...healthData, newItem]);
-    dispatch(addHotel({ healthData: [...healthData] }));
   };
 
   const deleteItem = (id) => {
@@ -39,8 +38,13 @@ const Health = () => {
 
   const handleChange = (index, field, value) => {
     const updatedHealthData = [...healthData];
-    updatedHealthData[index][field] = value;
+    const updatedItem = { ...updatedHealthData[index] };
+    updatedItem[field] = value;
+    updatedHealthData[index] = updatedItem;
     setHealthData(updatedHealthData);
+
+    // Update redux state
+    dispatch(addHotel({ healthData: updatedHealthData }));
   };
 
   return (

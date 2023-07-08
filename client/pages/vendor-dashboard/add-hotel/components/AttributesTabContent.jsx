@@ -42,7 +42,7 @@ const AttributesTabContent = () => {
     const checkedSections = sections
       .map((section, sectionIndex) => {
         const checkedItemsInSection = section.items.filter(
-          (item, itemIndex) => {
+          (_, itemIndex) => {
             return (
               checkedItems[sectionIndex] &&
               checkedItems[sectionIndex][itemIndex]

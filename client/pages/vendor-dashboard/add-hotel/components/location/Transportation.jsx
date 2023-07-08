@@ -27,20 +27,26 @@ const Transportation = () => {
     const newItem = { id: Date.now() };
     setItems([...items, newItem]);
     setTransportationData([...transportationData, newItem]);
-    dispatch(addHotel({ transportationData: [...transportationData] }));
   };
 
   const deleteItem = (id) => {
     const updatedItems = items.filter((item) => item.id !== id);
     setItems(updatedItems);
-    const updatedTransportationData = transportationData.filter((item) => item.id !== id);
+    const updatedTransportationData = transportationData.filter(
+      (item) => item.id !== id
+    );
     setTransportationData(updatedTransportationData);
   };
 
   const handleChange = (index, field, value) => {
     const updatedTransportationData = [...transportationData];
-    updatedTransportationData[index][field] = value;
+    const updatedItem = { ...updatedTransportationData[index] };
+    updatedItem[field] = value;
+    updatedTransportationData[index] = updatedItem;
     setTransportationData(updatedTransportationData);
+
+    // Update redux state
+    dispatch(addHotel({ transportationData: updatedTransportationData }));
   };
 
   return (

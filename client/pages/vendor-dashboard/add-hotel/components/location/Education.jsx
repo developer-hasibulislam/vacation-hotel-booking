@@ -27,7 +27,6 @@ const Education = () => {
     const newItem = { id: Date.now() };
     setItems([...items, newItem]);
     setEducationData([...educationData, newItem]);
-    dispatch(addHotel({ educationData: [...educationData] }));
   };
 
   const deleteItem = (id) => {
@@ -39,8 +38,13 @@ const Education = () => {
 
   const handleChange = (index, field, value) => {
     const updatedEducationData = [...educationData];
-    updatedEducationData[index][field] = value;
+    const updatedItem = { ...updatedEducationData[index] };
+    updatedItem[field] = value;
+    updatedEducationData[index] = updatedItem;
     setEducationData(updatedEducationData);
+
+    // Update redux state
+    dispatch(addHotel({ educationData: updatedEducationData }));
   };
 
   return (
