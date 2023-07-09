@@ -14,7 +14,7 @@ import {
   useUploadAttributeIconMutation,
 } from "../../../../features/attribute/attributeApi";
 
-const IconUploader = ({ attributeIcon, setAttributeIcon }) => {
+const IconUploader = ({ setAttributeIcon }) => {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [error, setError] = useState(null);
   const [uploadIcon, { data }] = useUploadAttributeIconMutation();
@@ -109,12 +109,13 @@ const DynamicAttribute = () => {
   const handleAddAttribute = (event) => {
     event.preventDefault();
 
-    const attributeTitle = event.target.elements.attributeTitle.value;
-    const attributeItem = event.target.elements.attributeItem.value;
+    const attributeTitle = event.target.elements.attributeTitle.value || null;
+    const attributeItem = event.target.elements.attributeItem.value || null;
 
     const attributeInfo = {
       title: attributeTitle,
       items: [
+        ...attributeItems,
         {
           item: attributeItem,
           icon: attributeIcon,
@@ -122,7 +123,7 @@ const DynamicAttribute = () => {
       ],
     };
 
-    addNewAttribute(attributeInfo);
+    // addNewAttribute(attributeInfo);
     console.log(attributeInfo);
   };
 
@@ -149,7 +150,7 @@ const DynamicAttribute = () => {
                 <input type="file" name="regularPrice" required />
               </div> */}
         <IconUploader
-          attributeItems={attributeItems}
+          attributeIcon={attributeIcon}
           setAttributeIcon={setAttributeIcon}
         />
         <div className="mt-30">
