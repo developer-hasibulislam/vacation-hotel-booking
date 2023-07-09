@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import OutsideClickHandler from "../outside-click/OutsideClickHandler";
 
-const SearchFilter = () => {
+const SearchFilter = ({ setAttributeItems }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);

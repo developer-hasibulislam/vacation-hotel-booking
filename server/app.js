@@ -16,6 +16,7 @@ const error = require("./middlewares/error.middleware");
 
 /* router level imports */
 const hotelRouter = require("./routes/hotel.route");
+const attributeRouter = require("./routes/attribute.route");
 
 /* application level connection */
 const app = express();
@@ -38,6 +39,7 @@ app.use(express.json());
 
 /* router level connections */
 app.use("/api/vendor", hotelRouter);
+app.use("/api/attribute", attributeRouter);
 
 /* global error handler */
 app.use(error);

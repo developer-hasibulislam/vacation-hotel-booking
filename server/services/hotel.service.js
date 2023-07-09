@@ -7,7 +7,7 @@
  */
 
 const fs = require("fs");
-const Hotel = require("../models/vendor/hotel.model");
+const Hotel = require("../models/hotel.model");
 
 exports.uploadImages = async (req, res) => {
   const files = {};
