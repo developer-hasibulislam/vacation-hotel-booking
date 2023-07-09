@@ -11,6 +11,7 @@ const {
   addNewAttribute,
   updateAttribute,
   deleteIcon,
+  getAttributes,
 } = require("../services/attribute.service");
 
 exports.uploadIcon = async (req, res, next) => {
@@ -52,6 +53,18 @@ exports.addNewAttribute = async (req, res, next) => {
 exports.updateAttribute = async (req, res, next) => {
   try {
     await updateAttribute(req, res);
+  } catch (error) {
+    next(error);
+  } finally {
+    console.log(
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+    );
+  }
+};
+
+exports.getAttributes = async (req, res, next) => {
+  try {
+    await getAttributes(req, res);
   } catch (error) {
     next(error);
   } finally {

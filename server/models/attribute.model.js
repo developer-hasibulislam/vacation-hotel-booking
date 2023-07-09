@@ -11,8 +11,12 @@ const mongoose = require("mongoose");
 const attributeSchema = new mongoose.Schema(
   {
     title: String,
-    items: [String],
-    icon: String,
+    items: [
+      {
+        item: String,
+        icon: String,
+      },
+    ],
     createdAt: {
       type: Date,
       default: Date.now,

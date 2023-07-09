@@ -2,46 +2,27 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHotel } from "../../../../features/hotel/hotelSlice";
 import { useAddNewHotelMutation } from "../../../../features/hotel/hotelApi";
+import { useGetAttributesQuery } from "../../../../features/attribute/attributeApi";
+import Image from "next/image";
 
 const AttributesTabContent = () => {
   const dispatch = useDispatch();
   const { hotel } = useSelector((state) => state.hotel);
   const [addNewHotel, { isLoading }] = useAddNewHotelMutation();
+  const { data } = useGetAttributesQuery();
 
-  const sections = [
-    {
-      title: "Property Type",
-      items: ["Apartments", "Boats", "Holiday homes"],
-    },
-    {
-      title: "Facilities",
-      items: [
-        "TV",
-        "Kitchen",
-        "Shower",
-        "Balcony",
-        "Parking",
-        "Air conditioning",
-        "Smoking allowed",
-        "Pets allowed",
-      ],
-    },
-    {
-      title: "Hotel Services",
-      items: ["Apartments", "Boats"],
-    },
-  ];
+  const sections = data?.attributes || [];
+
+  const [checkedItems, setCheckedItems] = useState([]);
 
   const defaultCheckedItems = sections.map((section) => {
     return section.items.map((item) => {
       const foundItem = hotel.attributes?.find(
-        (attr) => attr.title === section.title && attr.items.includes(item)
+        (attr) => attr.title === section.title && attr.items.includes(item.item)
       );
       return foundItem ? true : false;
     });
   });
-
-  const [checkedItems, setCheckedItems] = useState(defaultCheckedItems);
 
   const handleCheckboxChange = (sectionIndex, itemIndex) => {
     const updatedCheckedItems = [...checkedItems];
@@ -50,24 +31,27 @@ const AttributesTabContent = () => {
       !updatedCheckedItems[sectionIndex][itemIndex];
     setCheckedItems(updatedCheckedItems);
 
-    // Dispatch the addHotel action with the updated checked sections
-    const checkedSections = sections
-      .map((section, sectionIndex) => {
-        const checkedItemsInSection = section.items.filter((_, itemIndex) => {
-          return (
-            updatedCheckedItems[sectionIndex] &&
-            updatedCheckedItems[sectionIndex][itemIndex]
-          );
-        });
-        if (checkedItemsInSection.length > 0) {
-          return { ...section, items: checkedItemsInSection };
-        }
-        return null;
-      })
-      .filter((section) => section !== null);
+    // Create a new array to store the selected items
+    const selectedItems = [];
 
-    if (checkedSections.length) {
-      dispatch(addHotel({ attributes: checkedSections }));
+    sections.forEach((section, sectionIndex) => {
+      const checkedItemsInSection = section.items.filter((_, itemIndex) => {
+        return (
+          updatedCheckedItems[sectionIndex] &&
+          updatedCheckedItems[sectionIndex][itemIndex]
+        );
+      });
+
+      if (checkedItemsInSection.length > 0) {
+        selectedItems.push({
+          title: section.title,
+          items: checkedItemsInSection.map((item) => item.item),
+        });
+      }
+    });
+
+    if (selectedItems.length > 0) {
+      dispatch(addHotel({ attributes: selectedItems }));
     }
   };
 
@@ -102,7 +86,16 @@ const AttributesTabContent = () => {
                     <div className="form-checkbox__mark">
                       <div className="form-checkbox__icon icon-check" />
                     </div>
-                    <div className="text-15 lh-11 ml-10">{item}</div>
+                    <div className="text-15 lh-11 ml-10">
+                      <Image
+                        src={item.icon}
+                        alt={item.icon}
+                        width={24}
+                        height={24}
+                        className="me-2 mb-2"
+                      />
+                      {item.item}
+                    </div>
                   </div>
                 </div>
               </div>

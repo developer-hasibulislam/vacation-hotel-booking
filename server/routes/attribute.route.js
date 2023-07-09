@@ -14,6 +14,7 @@ const {
   addNewAttribute,
   updateAttribute,
   deleteIcon,
+  getAttributes,
 } = require("../controllers/attribute.controller");
 
 const router = express.Router();
@@ -23,6 +24,10 @@ router
   .post(upload.single("icon"), uploadIcon)
   .delete(deleteIcon);
 
-router.route("/").post(addNewAttribute).patch(updateAttribute);
+router
+  .route("/")
+  .post(addNewAttribute)
+  .patch(updateAttribute)
+  .get(getAttributes);
 
 module.exports = router;

@@ -17,6 +17,23 @@ const attributeApi = apiSlice.injectEndpoints({
         method: "POST",
         body: formData,
       }),
+
+      onQueryStarted: async (_, { __, queryFulfilled }) => {
+        const { data } = await queryFulfilled;
+        return data;
+      },
+
+      invalidatesTags: ["Attribute"],
+    }),
+
+    // delete attribute icon
+    deleteAttributeIcon: builder.mutation({
+      query: (filename) => ({
+        url: `/attribute/icon/?filename=${filename}`,
+        method: "DELETE",
+      }),
+
+      invalidatesTags: ["Attribute"],
     }),
 
     // add new attribute
@@ -26,6 +43,8 @@ const attributeApi = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
+
+      invalidatesTags: ["Attribute"],
     }),
 
     // update attribute
@@ -35,12 +54,23 @@ const attributeApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body,
       }),
+
+      invalidatesTags: ["Attribute"],
+    }),
+
+    // get attributes
+    getAttributes: builder.query({
+      query: () => "/attribute/",
+
+      providesTags: ["Attribute"],
     }),
   }),
 });
 
 export const {
   useUploadAttributeIconMutation,
+  useDeleteAttributeIconMutation,
   useAddNewAttributeMutation,
   useUpdateAttributeMutation,
+  useGetAttributesQuery,
 } = attributeApi;

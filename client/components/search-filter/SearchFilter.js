@@ -41,7 +41,6 @@ const SearchFilter = ({ setAttributeItems }) => {
     <div className="form-input w-100 bg-light-3 position-relative">
       <input
         type="text"
-        required
         value={searchTerm}
         onChange={handleInputChange}
         onClick={handleClick}

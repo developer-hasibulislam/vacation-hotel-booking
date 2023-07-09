@@ -52,3 +52,13 @@ exports.updateAttribute = async ({ body }, res) => {
     message: "Attribute updated successfully",
   });
 };
+
+exports.getAttributes = async (req, res) => {
+  const attributes = await Attribute.find();
+
+  return res.status(200).json({
+    acknowledgement: true,
+    message: "Attributes fetched successfully",
+    attributes,
+  });
+};

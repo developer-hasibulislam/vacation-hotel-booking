@@ -6,17 +6,25 @@
  * Date: 09, July 2023
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchFilter from "../../../../components/search-filter/SearchFilter";
 import {
   useAddNewAttributeMutation,
+  useDeleteAttributeIconMutation,
   useUploadAttributeIconMutation,
 } from "../../../../features/attribute/attributeApi";
 
-const IconUploader = ({ setAttributeIcon }) => {
+const IconUploader = ({ attributeIcon, setAttributeIcon }) => {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [error, setError] = useState(null);
   const [uploadIcon, { data }] = useUploadAttributeIconMutation();
+  const [deleteIcon] = useDeleteAttributeIconMutation();
+
+  useEffect(() => {
+    if (data?.file) {
+      setAttributeIcon(data.file);
+    }
+  }, [data, setAttributeIcon]);
 
   const handleIconChange = (event) => {
     const file = event.target.files[0];
@@ -26,12 +34,10 @@ const IconUploader = ({ setAttributeIcon }) => {
       const img = new Image();
       img.onload = () => {
         if (img.width !== 24 || img.height !== 24) {
-          // Show error message or take necessary action
           setError("Invalid icon dimensions. Icon should be 24x24 pixels.");
         } else {
           setSelectedIcon(reader.result);
 
-          const file = event.target.files[0];
           const formData = new FormData();
           formData.append("icon", file);
           uploadIcon(formData);
@@ -48,6 +54,7 @@ const IconUploader = ({ setAttributeIcon }) => {
 
   const removePreview = () => {
     setSelectedIcon(null);
+    deleteIcon(data?.file?.replace(/^http:\/\/localhost:8080\//, ""));
   };
 
   return (
@@ -94,29 +101,25 @@ const IconUploader = ({ setAttributeIcon }) => {
 };
 
 const DynamicAttribute = () => {
-  const [attributeTitle, setAttributeTitle] = useState("");
-  const [attributeItem, setAttributeItem] = useState("");
   const [attributeIcon, setAttributeIcon] = useState("");
-  const [attributeItems, setAttributeItems] = useState({});
+  const [attributeItems, setAttributeItems] = useState([]);
 
-  const [addNewAttribute] = useAddNewAttributeMutation();
-
-  const handleAttributeTitleChange = (event) => {
-    setAttributeTitle(event.target.value);
-  };
-
-  const handleAttributeItemChange = (event) => {
-    setAttributeItem(event.target.value);
-  };
+  const [addNewAttribute, { isLoading }] = useAddNewAttributeMutation();
 
   const handleAddAttribute = (event) => {
     event.preventDefault();
 
+    const attributeTitle = event.target.elements.attributeTitle.value;
+    const attributeItem = event.target.elements.attributeItem.value;
+
     const attributeInfo = {
-      attributeTitle,
-      attributeItem,
-      attributeIcon,
-      //   attributeItems,
+      title: attributeTitle,
+      items: [
+        {
+          item: attributeItem,
+          icon: attributeIcon,
+        },
+      ],
     };
 
     addNewAttribute(attributeInfo);
@@ -125,34 +128,42 @@ const DynamicAttribute = () => {
 
   return (
     <>
-      <form className="bg-light-2 d-flex flex-lg-nowrap flex-wrap gap-3 justify-content-between w-100 mb-5">
+      <form
+        onSubmit={handleAddAttribute}
+        className="bg-light-2 d-flex flex-lg-nowrap flex-wrap gap-3 justify-content-between w-100 mb-5"
+      >
         {/* new attribute title */}
         <div className="form-input w-100 bg-light-3">
-          <input type="text" onChange={handleAttributeTitleChange} />
+          <input type="text" name="attributeTitle" />
           <label className="lh-1 text-16 text-light-1">Attribute Title</label>
         </div>
         {/* new attribute items */}
-        <SearchFilter
-          attributeIcon={attributeIcon}
-          setAttributeItems={setAttributeItems}
-        />
+        <SearchFilter setAttributeItems={setAttributeItems} />
         {/* new attribute item */}
         <div className="form-input w-100 bg-light-3">
-          <input type="text" required onChange={handleAttributeItemChange} />
+          <input type="text" name="attributeItem" />
           <label className="lh-1 text-16 text-light-1">Attribute item</label>
         </div>
         {/* new attribute icon */}
         {/* <div className="form-input w-100">
                 <input type="file" name="regularPrice" required />
               </div> */}
-        <IconUploader setAttributeIcon={setAttributeIcon} />
+        <IconUploader
+          attributeItems={attributeItems}
+          setAttributeIcon={setAttributeIcon}
+        />
         <div className="mt-30">
           <button
             type="submit"
             className="button h-50 px-24 -dark-1 bg-blue-1 text-white text-nowrap"
-            onClick={handleAddAttribute}
           >
-            Add Attribute <div className="icon-arrow-top-right ml-15" />
+            {isLoading ? (
+              "Loading..."
+            ) : (
+              <>
+                Add Attribute <div className="icon-arrow-top-right ml-15" />
+              </>
+            )}
           </button>
         </div>
       </form>
