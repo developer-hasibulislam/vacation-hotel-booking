@@ -123,8 +123,7 @@ const DynamicAttribute = () => {
       ],
     };
 
-    // addNewAttribute(attributeInfo);
-    console.log(attributeInfo);
+    addNewAttribute(attributeInfo);
   };
 
   return (
