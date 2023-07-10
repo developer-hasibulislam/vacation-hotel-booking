@@ -1,3 +1,11 @@
+/**
+ * Title: AttributesTabContent.jsx
+ * Author: Hasibul Islam
+ * Portfolio: https://developer-hasibulislam.vercel.app
+ * Linkedin: https://www.linkedin.com/in/developer-hasibulislam
+ * Date: 10, July 2023
+ */
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHotel } from "../../../../features/hotel/hotelSlice";
@@ -13,8 +21,6 @@ const AttributesTabContent = () => {
 
   const sections = data?.attributes || [];
 
-  const [checkedItems, setCheckedItems] = useState([]);
-
   const defaultCheckedItems = sections.map((section) => {
     return section.items.map((item) => {
       const foundItem = hotel.attributes?.find(
@@ -23,6 +29,8 @@ const AttributesTabContent = () => {
       return foundItem ? true : false;
     });
   });
+
+  const [checkedItems, setCheckedItems] = useState(defaultCheckedItems);
 
   const handleCheckboxChange = (sectionIndex, itemIndex) => {
     const updatedCheckedItems = [...checkedItems];
