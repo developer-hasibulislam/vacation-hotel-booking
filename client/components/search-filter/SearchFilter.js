@@ -10,8 +10,7 @@ import React, { useState } from "react";
 import OutsideClickHandler from "../outside-click/OutsideClickHandler";
 import { useGetAttributesQuery } from "../../features/attribute/attributeApi";
 
-const SearchFilter = ({ setAttributeItems }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const SearchFilter = ({ searchTerm, setSearchTerm, setAttributeItems }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState("");

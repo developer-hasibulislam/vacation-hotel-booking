@@ -10,7 +10,10 @@ const mongoose = require("mongoose");
 
 const attributeSchema = new mongoose.Schema(
   {
-    title: String,
+    title: {
+      type: String,
+      unique: true,
+    },
     items: [
       {
         item: String,

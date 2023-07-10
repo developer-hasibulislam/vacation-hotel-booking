@@ -44,8 +44,8 @@ exports.addNewAttribute = async ({ body }, res) => {
   });
 };
 
-exports.updateAttribute = async ({ body }, res) => {
-  await Attribute.findByIdAndUpdate(body._id, body, { new: true });
+exports.updateAttribute = async ({ query, body }, res) => {
+  await Attribute.findOneAndUpdate({ title: query.title }, body, { new: true });
 
   return res.status(200).json({
     acknowledgement: true,

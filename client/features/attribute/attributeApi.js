@@ -49,8 +49,8 @@ const attributeApi = apiSlice.injectEndpoints({
 
     // update attribute
     updateAttribute: builder.mutation({
-      query: (body) => ({
-        url: "/attribute/",
+      query: ({ title, body }) => ({
+        url: `/attribute/?title=${title}`,
         method: "PATCH",
         body,
       }),

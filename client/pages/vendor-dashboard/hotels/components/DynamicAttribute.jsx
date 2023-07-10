@@ -11,6 +11,7 @@ import SearchFilter from "../../../../components/search-filter/SearchFilter";
 import {
   useAddNewAttributeMutation,
   useDeleteAttributeIconMutation,
+  useUpdateAttributeMutation,
   useUploadAttributeIconMutation,
 } from "../../../../features/attribute/attributeApi";
 
@@ -103,8 +104,12 @@ const IconUploader = ({ setAttributeIcon }) => {
 const DynamicAttribute = () => {
   const [attributeIcon, setAttributeIcon] = useState("");
   const [attributeItems, setAttributeItems] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const [addNewAttribute, { isLoading }] = useAddNewAttributeMutation();
+  const [addNewAttribute, { isLoading: addNewAttributeLoading }] =
+    useAddNewAttributeMutation();
+  const [updateAttribute, { isLoading: updateAttributeLoading }] =
+    useUpdateAttributeMutation();
 
   const handleAddAttribute = (event) => {
     event.preventDefault();
@@ -113,7 +118,7 @@ const DynamicAttribute = () => {
     const attributeItem = event.target.elements.attributeItem.value || null;
 
     const attributeInfo = {
-      title: attributeTitle,
+      title: attributeTitle?.length ? attributeTitle : searchTerm,
       items: [
         ...attributeItems,
         {
@@ -123,7 +128,9 @@ const DynamicAttribute = () => {
       ],
     };
 
-    addNewAttribute(attributeInfo);
+    attributeTitle?.length
+      ? addNewAttribute(attributeInfo)
+      : updateAttribute({ title: searchTerm, body: attributeInfo });
   };
 
   return (
@@ -138,7 +145,11 @@ const DynamicAttribute = () => {
           <label className="lh-1 text-16 text-light-1">Attribute Title</label>
         </div>
         {/* new attribute items */}
-        <SearchFilter setAttributeItems={setAttributeItems} />
+        <SearchFilter
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          setAttributeItems={setAttributeItems}
+        />
         {/* new attribute item */}
         <div className="form-input w-100 bg-light-3">
           <input type="text" name="attributeItem" />
@@ -157,7 +168,7 @@ const DynamicAttribute = () => {
             type="submit"
             className="button h-50 px-24 -dark-1 bg-blue-1 text-white text-nowrap"
           >
-            {isLoading ? (
+            {addNewAttributeLoading || updateAttributeLoading ? (
               "Loading..."
             ) : (
               <>

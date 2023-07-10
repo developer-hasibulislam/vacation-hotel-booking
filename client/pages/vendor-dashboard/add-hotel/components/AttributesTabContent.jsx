@@ -86,7 +86,7 @@ const AttributesTabContent = () => {
                     <div className="form-checkbox__mark">
                       <div className="form-checkbox__icon icon-check" />
                     </div>
-                    <div className="text-15 lh-11 ml-10">
+                    <div className="text-15 lh-11 ml-10 text-nowrap">
                       <Image
                         src={item.icon}
                         alt={item.icon}

@@ -58,7 +58,7 @@ const hotelApi = apiSlice.injectEndpoints({
     // update hotel
     updateHotel: builder.mutation({
       query: ({ id, body }) => ({
-        url: `/vendor/hotel/?i=${id}`,
+        url: `/vendor/hotel/?id=${id}`,
         method: "PATCH",
         body,
       }),
