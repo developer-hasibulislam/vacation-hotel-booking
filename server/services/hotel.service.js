@@ -93,6 +93,7 @@ exports.getHotelOrHotels = async (req, res) => {
     res.send({
       acknowledgement: true,
       message: "Hotels fetched successfully",
+      total,
       hotels,
       pagination,
     });

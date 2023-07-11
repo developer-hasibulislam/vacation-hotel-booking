@@ -14,7 +14,7 @@ const {
   addNewAttribute,
   updateAttribute,
   deleteIcon,
-  getAttributes,
+  getAttributeOrAttributes,
 } = require("../controllers/attribute.controller");
 
 const router = express.Router();
@@ -28,6 +28,6 @@ router
   .route("/")
   .post(addNewAttribute)
   .patch(updateAttribute)
-  .get(getAttributes);
+  .get(getAttributeOrAttributes);
 
 module.exports = router;

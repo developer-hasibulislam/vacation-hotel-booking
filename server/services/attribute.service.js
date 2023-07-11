@@ -53,12 +53,61 @@ exports.updateAttribute = async ({ query, body }, res) => {
   });
 };
 
-exports.getAttributes = async (req, res) => {
-  const attributes = await Attribute.find();
+exports.getAttributeOrAttributes = async (req, res) => {
+  if (req.query.id) {
+    // get single attribute
+    const attribute = await Attribute.findById(req.query.id);
 
-  return res.status(200).json({
-    acknowledgement: true,
-    message: "Attributes fetched successfully",
-    attributes,
-  });
+    return res.status(200).json({
+      acknowledgement: true,
+      message: "Attribute fetched successfully",
+      attribute,
+    });
+
+    // get attributes by page
+  } else if (req.query.page) {
+    const page = parseInt(req.query.page);
+    const limit = 10;
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    const attributes = await Attribute.find()
+      .sort({ updatedAt: -1 })
+      .skip(startIndex)
+      .limit(limit);
+
+    const total = await Attribute.countDocuments();
+
+    const pagination = {};
+
+    if (endIndex < (total)) {
+      pagination.next = {
+        page: page + 1,
+        limit,
+      };
+    } else if (startIndex > 0) {
+      pagination.prev = {
+        page: page - 1,
+        limit,
+      };
+    }
+
+    return res.status(200).json({
+      acknowledgement: true,
+      message: "Attributes fetched successfully",
+      total,
+      attributes,
+      pagination,
+    });
+    // get all attributes
+  } else {
+    const attributes = await Attribute.find();
+
+    return res.status(200).json({
+      acknowledgement: true,
+      message: "Attributes fetched successfully",
+      attributes,
+    });
+  }
 };

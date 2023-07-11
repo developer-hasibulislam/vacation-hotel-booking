@@ -64,6 +64,18 @@ const attributeApi = apiSlice.injectEndpoints({
 
       providesTags: ["Attribute"],
     }),
+
+    // get single attribute
+    getSingleAttribute: builder.query({
+      query: (id) => `/attribute/?id=${id}`,
+      providesTags: ["Attribute"],
+    }),
+
+    // get attribute by pagination
+    getAttributeByPagination: builder.query({
+      query: (page) => `/attribute/?page=${page}`,
+      providesTags: ["Attribute"],
+    }),
   }),
 });
 
@@ -73,4 +85,6 @@ export const {
   useAddNewAttributeMutation,
   useUpdateAttributeMutation,
   useGetAttributesQuery,
+  useGetSingleAttributeQuery,
+  useGetAttributeByPaginationQuery,
 } = attributeApi;
