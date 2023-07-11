@@ -119,6 +119,7 @@ const hotelSchema = new mongoose.Schema(
     },
 
     // 4. Attributes Part
+
     attributes: [
       {
         title: {

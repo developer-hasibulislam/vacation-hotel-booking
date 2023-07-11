@@ -8,6 +8,7 @@
 
 const fs = require("fs");
 const Hotel = require("../models/hotel.model");
+const Attribute = require("../models/attribute.model");
 
 exports.uploadImages = async (req, res) => {
   const files = {};
@@ -42,7 +43,11 @@ exports.deleteImage = async function ({ query }, res) {
 };
 
 exports.addNewHotel = async ({ body }, res) => {
-  await Hotel.create(body);
+  const hotel = await Hotel.create(body);
+
+  hotel.attributes.forEach(async (attribute, index) => {
+    await Attribute.findOneAndUpdate({ title: attribute.title }, {$push: {"items.$[].hotels": hotel._id}});
+  });
 
   return res.status(200).json({
     acknowledgement: true,

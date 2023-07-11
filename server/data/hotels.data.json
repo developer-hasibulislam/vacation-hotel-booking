@@ -99,16 +99,12 @@
     "minimumDayStay": 2,
     "attributes": [
       {
-        "title": "Property Type",
-        "items": ["Apartments", "Boats", "Holiday Homes"]
+        "title": "Health",
+        "items": ["Consultancy"]
       },
       {
-        "title": "Facilities",
-        "items": ["TV", "Kitchen", "Air Conditioning"]
-      },
-      {
-        "title": "Hotel Services",
-        "items": ["Boats"]
+        "title": "What's Next",
+        "items": ["Female Fitness"]
       }
     ]
   }

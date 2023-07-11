@@ -18,6 +18,12 @@ const attributeSchema = new mongoose.Schema(
       {
         item: String,
         icon: String,
+        hotels: [
+          {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Hotel",
+          },
+        ],
       },
     ],
     createdAt: {
