@@ -36,7 +36,11 @@ const BookingTable = () => {
                       <tr key={item._id}>
                         <td className="text-blue-1 fw-500">{item.item}</td>
                         <td>{title}</td>
-                        <td>N/A</td>
+                        <td>
+                          <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-blue-1-05 text-blue-1">
+                            {item?.hotels?.length}
+                          </span>
+                        </td>
                         <td>
                           <div className="row x-gap-10 y-gap-10 items-center">
                             <div className="col-auto">
