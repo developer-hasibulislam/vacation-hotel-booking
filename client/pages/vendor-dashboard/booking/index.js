@@ -35,9 +35,6 @@ const index = () => {
     };
 
     addNewUser(vendorInfo);
-
-    event.target.reset();
-    setBirthday(getTodayDate());
   }
 
   return (

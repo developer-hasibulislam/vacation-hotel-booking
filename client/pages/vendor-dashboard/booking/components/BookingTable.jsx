@@ -1,8 +1,11 @@
 import { useState } from "react";
 import Pagination from "../../common/Pagination";
+import { useGetUserByPaginationQuery } from "../../../../features/user/userApi";
 
 const BookingTable = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [page, setPage] = useState(1);
+  const { data } = useGetUserByPaginationQuery(page);
 
   const handleTabClick = ({ index, item }) => {
     setActiveTab(index);
@@ -45,36 +48,48 @@ const BookingTable = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>hasibulislam999</td>
-                    <td>Hasibul Islam</td>
-                    <td>Vendor</td>
-                    <td>04/04/2022</td>
-                    <td className="lh-16">0</td>
-                    <td>
-                      <div className="row x-gap-10 y-gap-10 items-center">
-                        <div className="col-auto">
-                          {/* edit */}
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-edit text-16 text-light-1" />
-                          </button>
+                  {data?.users?.map((user) => (
+                    <tr key={user?._id}>
+                      <td>{user?.username}</td>
+                      <td>
+                        {user?.name?.firstName} {user?.name?.lastName}
+                      </td>
+                      <td>{user?.role}</td>
+                      <td>
+                        {user?.dateOfBirth
+                          ? new Date(user?.dateOfBirth).toLocaleDateString(
+                              "en-US",
+                              { day: "numeric", month: "long", year: "numeric" }
+                            )
+                          : ""}
+                      </td>
+
+                      <td className="lh-16">{user?.hotels?.length}</td>
+                      <td>
+                        <div className="row x-gap-10 y-gap-10 items-center">
+                          <div className="col-auto">
+                            {/* edit */}
+                            <button className="flex-center bg-light-2 rounded-4 size-35">
+                              <i className="icon-edit text-16 text-light-1" />
+                            </button>
+                          </div>
+                          <div className="col-auto">
+                            {/* delete */}
+                            <button className="flex-center bg-light-2 rounded-4 size-35">
+                              <i className="icon-trash-2 text-16 text-light-1" />
+                            </button>
+                          </div>
                         </div>
-                        <div className="col-auto">
-                          {/* delete */}
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-trash-2 text-16 text-light-1" />
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-      <Pagination />
+      <Pagination totalPages={Math.ceil(data?.total / 10)} setPage={setPage} />
     </>
   );
 };
