@@ -137,7 +137,7 @@ const DynamicAttribute = () => {
     <>
       <form
         onSubmit={handleAddAttribute}
-        className="bg-light-2 d-flex flex-lg-nowrap flex-wrap gap-3 justify-content-between w-100 mb-5"
+        className="bg-white px-30 py-30 d-flex flex-lg-nowrap flex-wrap gap-3 justify-content-between w-100 mb-5"
       >
         {/* new attribute title */}
         <div className="form-input w-100 bg-light-3">

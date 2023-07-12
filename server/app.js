@@ -15,6 +15,7 @@ require("dotenv").config();
 const error = require("./middlewares/error.middleware");
 
 /* router level imports */
+const userRouter = require("./routes/user.route");
 const hotelRouter = require("./routes/hotel.route");
 const attributeRouter = require("./routes/attribute.route");
 
@@ -38,6 +39,7 @@ app.use(
 app.use(express.json());
 
 /* router level connections */
+app.use("/api/user", userRouter);
 app.use("/api/vendor", hotelRouter);
 app.use("/api/attribute", attributeRouter);
 

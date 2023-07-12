@@ -144,6 +144,11 @@ const hotelSchema = new mongoose.Schema(
       enum: ["active", "inactive"],
       default: "active",
     },
+
+    vendor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );
