@@ -21,7 +21,7 @@ exports.uploadIcon = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -33,7 +33,7 @@ exports.deleteIcon = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -45,7 +45,7 @@ exports.addNewAttribute = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -57,7 +57,7 @@ exports.updateAttribute = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -69,7 +69,7 @@ exports.getAttributeOrAttributes = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };

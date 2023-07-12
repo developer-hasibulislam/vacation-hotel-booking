@@ -20,7 +20,7 @@ exports.uploadAvatar = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -32,7 +32,7 @@ exports.deleteAvatar = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -44,7 +44,7 @@ exports.addNewUser = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -56,7 +56,7 @@ exports.getUserOrUsers = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };

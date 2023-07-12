@@ -22,7 +22,7 @@ exports.uploadImages = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -34,7 +34,7 @@ exports.deleteImage = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -46,7 +46,7 @@ exports.addNewHotel = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -58,7 +58,7 @@ exports.getHotelOrHotels = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -70,7 +70,7 @@ exports.updateHotel = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };
@@ -82,7 +82,7 @@ exports.deleteHotelOrHotels = async (req, res, next) => {
     next(error);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 };

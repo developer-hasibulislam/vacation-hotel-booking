@@ -12,11 +12,27 @@ const BookingTable = () => {
     console.log(item);
   };
 
-  const tabItems = ["Active Users", "Paused Users", "Trashed Users"];
+  const tabItems = ["Active Vendors", "Paused Vendors", "Trashed Vendors"];
+
+  // Filter users based on tab selection
+  const filteredUsers = data?.users?.filter((user) => {
+    if (activeTab === 0) {
+      // Active Vendors
+      return user.status === "active";
+    } else if (activeTab === 1) {
+      // Paused Vendors
+      return user.status === "paused";
+    } else if (activeTab === 2) {
+      // Trashed Vendors
+      return user.status === "inactive";
+    }
+    return true; // Show all users if activeTab is not set
+  });
 
   return (
     <>
       <div className="tabs -underline-2 js-tabs">
+        {/* Tab controls */}
         <div className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
           {tabItems.map((item, index) => (
             <div className="col-auto" key={index}>
@@ -33,6 +49,7 @@ const BookingTable = () => {
         </div>
         {/* End tabs */}
 
+        {/* Table */}
         <div className="tabs__content pt-30 js-tabs-content">
           <div className="tabs__pane -tab-item-1 is-tab-el-active">
             <div className="overflow-scroll scroll-bar-1">
@@ -48,7 +65,7 @@ const BookingTable = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.users?.map((user) => (
+                  {filteredUsers?.map((user) => (
                     <tr key={user?._id}>
                       <td>{user?.username}</td>
                       <td>
@@ -63,7 +80,6 @@ const BookingTable = () => {
                             )
                           : ""}
                       </td>
-
                       <td className="lh-16">{user?.hotels?.length}</td>
                       <td>
                         <div className="row x-gap-10 y-gap-10 items-center">

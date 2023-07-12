@@ -57,7 +57,7 @@ app.get("/", (req, res, next) => {
     next(err);
   } finally {
     console.log(
-      `${req.method}: ${req.protocol}://${req.get("host")}${req.path}`
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
     );
   }
 });
