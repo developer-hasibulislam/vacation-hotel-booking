@@ -8,6 +8,7 @@
 
 const fs = require("fs");
 const Attribute = require("../models/attribute.model");
+const Hotel = require("../models/hotel.model");
 
 exports.uploadIcon = async (req, res) => {
   const file = `${req.protocol}://${req.get("host")}/${req.file.filename}`;
@@ -113,11 +114,29 @@ exports.getAttributeOrAttributes = async (req, res) => {
 };
 
 exports.deleteAttribute = async ({ query }, res) => {
-  await Attribute.findOneAndUpdate(
-    { _id: query.id },
-    { $pull: { items: { item: query.item } } },
-    { new: true }
-  );
+  // step 1: find the attribute
+  const attribute = await Attribute.findById(query.id);
+
+  // step 2: find the sub-attribute from the attribute
+  const subAttribute = attribute.items.find((item) => item.item === query.item);
+
+  // step 3: find hotels from the sub-attribute
+  const hotels = subAttribute.hotels;
+
+  // step 4: delete attribute from the hotels
+  hotels.forEach(async (hotel) => {
+    await Hotel.findOneAndUpdate(
+      { _id: hotel },
+      { $pull: { attributes: { title: attribute.title } } },
+      { new: true }
+    );
+  });
+
+  // step 5: delete the sub-attribute from the attribute
+  attribute.items = attribute.items.filter((item) => item.item !== query.item);
+
+  // step 6: save the attribute
+  await attribute.save({ validateBeforeSave: false });
 
   return res.status(200).json({
     acknowledgement: true,
