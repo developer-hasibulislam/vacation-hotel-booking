@@ -76,6 +76,15 @@ const attributeApi = apiSlice.injectEndpoints({
       query: (page) => `/attribute/?page=${page}`,
       providesTags: ["Attribute"],
     }),
+
+    // delete attribute
+    deleteAttribute: builder.mutation({
+      query: ({ id, item }) => ({
+        url: `/attribute/?id=${id}&item=${item}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Attribute"],
+    }),
   }),
 });
 
@@ -87,4 +96,5 @@ export const {
   useGetAttributesQuery,
   useGetSingleAttributeQuery,
   useGetAttributeByPaginationQuery,
+  useDeleteAttributeMutation,
 } = attributeApi;

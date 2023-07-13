@@ -81,7 +81,7 @@ exports.getAttributeOrAttributes = async (req, res) => {
 
     const pagination = {};
 
-    if (endIndex < (total)) {
+    if (endIndex < total) {
       pagination.next = {
         page: page + 1,
         limit,
@@ -110,4 +110,17 @@ exports.getAttributeOrAttributes = async (req, res) => {
       attributes,
     });
   }
+};
+
+exports.deleteAttribute = async ({ query }, res) => {
+  await Attribute.findOneAndUpdate(
+    { _id: query.id },
+    { $pull: { items: { item: query.item } } },
+    { new: true }
+  );
+
+  return res.status(200).json({
+    acknowledgement: true,
+    message: "Attribute deleted successfully",
+  });
 };

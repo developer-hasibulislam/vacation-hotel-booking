@@ -45,8 +45,20 @@ exports.deleteImage = async function ({ query }, res) {
 exports.addNewHotel = async ({ body }, res) => {
   const hotel = await Hotel.create(body);
 
-  hotel.attributes.forEach(async (attribute, index) => {
-    await Attribute.findOneAndUpdate({ title: attribute.title }, {$push: {"items.$[].hotels": hotel._id}});
+  hotel.attributes.forEach(async (attribute) => {
+    // await Attribute.findOneAndUpdate({ title: attribute.title }, {$push: {"items.$[].hotels": hotel._id}});
+    const attr = await Attribute.findOne({ title: attribute.title });
+    attr.items.forEach(async (item) => {
+      if (attribute.items.includes(item.item)) {
+        // await Attribute.findOneAndUpdate(
+        //   { title: attribute.title, "items.item": item.item },
+        //   { $push: { "items.$.hotels": hotel._id } }
+        // );
+
+        await item.hotels.push(hotel._id);
+      }
+    });
+    attr.save({ validateBeforeSave: false });
   });
 
   return res.status(200).json({

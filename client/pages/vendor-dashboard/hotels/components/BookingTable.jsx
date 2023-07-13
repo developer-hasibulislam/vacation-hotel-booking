@@ -8,11 +8,15 @@
 
 import { useState } from "react";
 import Pagination from "../../common/Pagination";
-import { useGetAttributeByPaginationQuery } from "../../../../features/attribute/attributeApi";
+import {
+  useDeleteAttributeMutation,
+  useGetAttributeByPaginationQuery,
+} from "../../../../features/attribute/attributeApi";
 
 const BookingTable = () => {
   const [page, setPage] = useState(1);
   const { data } = useGetAttributeByPaginationQuery(page);
+  const [deleteAttribute] = useDeleteAttributeMutation();
 
   return (
     <>
@@ -31,7 +35,7 @@ const BookingTable = () => {
                 </thead>
                 {/* End theade */}
                 <tbody>
-                  {data?.attributes?.map(({ items, title }) =>
+                  {data?.attributes?.map(({ items, title, _id }) =>
                     items.map((item) => (
                       <tr key={item._id}>
                         <td className="text-blue-1 fw-500">{item.item}</td>
@@ -43,15 +47,23 @@ const BookingTable = () => {
                         </td>
                         <td>
                           <div className="row x-gap-10 y-gap-10 items-center">
-                            <div className="col-auto">
-                              {/* edit */}
+                            {/* edit */}
+                            {/* <div className="col-auto">
                               <button className="flex-center bg-light-2 rounded-4 size-35">
                                 <i className="icon-edit text-16 text-light-1" />
                               </button>
-                            </div>
+                            </div> */}
                             <div className="col-auto">
                               {/* delete */}
-                              <button className="flex-center bg-light-2 rounded-4 size-35">
+                              <button
+                                className="flex-center bg-light-2 rounded-4 size-35"
+                                onClick={() =>
+                                  deleteAttribute({
+                                    id: _id,
+                                    item: item.item,
+                                  })
+                                }
+                              >
                                 <i className="icon-trash-2 text-16 text-light-1" />
                               </button>
                             </div>

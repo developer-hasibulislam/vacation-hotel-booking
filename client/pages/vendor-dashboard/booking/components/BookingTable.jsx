@@ -83,8 +83,8 @@ const BookingTable = () => {
                       <td className="lh-16">{user?.hotels?.length}</td>
                       <td>
                         <div className="row x-gap-10 y-gap-10 items-center">
+                          {/* edit */}
                           <div className="col-auto">
-                            {/* edit */}
                             <button className="flex-center bg-light-2 rounded-4 size-35">
                               <i className="icon-edit text-16 text-light-1" />
                             </button>
