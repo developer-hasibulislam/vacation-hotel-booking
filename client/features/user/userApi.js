@@ -10,6 +10,23 @@ import apiSlice from "../api/apiSlice";
 
 const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    // upload new avatar
+    uploadAvatar: builder.mutation({
+      query: (body) => ({
+        url: "/user/avatar",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    // delete avatar
+    deleteAvatar: builder.mutation({
+      query: (filename) => ({
+        url: `/user/avatar/?filename=${filename}`,
+        method: "DELETE",
+      }),
+    }),
+
     // add new user
     addNewUser: builder.mutation({
       query: (body) => ({
@@ -42,6 +59,8 @@ const userApi = apiSlice.injectEndpoints({
 });
 
 export const {
+  useUploadAvatarMutation,
+  useDeleteAvatarMutation,
   useAddNewUserMutation,
   useGetAllUsersQuery,
   useGetSingleUserQuery,

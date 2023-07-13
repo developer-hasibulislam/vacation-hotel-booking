@@ -1,12 +1,30 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  useDeleteAvatarMutation,
+  useUploadAvatarMutation,
+} from "../../../../features/user/userApi";
+import { addUser } from "../../../../features/user/userSlice";
 
 const AvatarUploader = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state?.user);
+  const [uploadAvatar, { data }] = useUploadAvatarMutation();
+  const [deleteAvatar] = useDeleteAvatarMutation();
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const handleImageChange = (e) => {
+  useEffect(() => {
+    if (data?.acknowledgement) {
+      dispatch(addUser({ avatar: data?.file }));
+    } else {
+      console.log(data?.message);
+    }
+  }, [data?.acknowledgement]);
+
+  const handleAvatarUpload = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
@@ -35,24 +53,35 @@ const AvatarUploader = () => {
     };
 
     reader.readAsDataURL(file);
+
+    const formData = new FormData();
+    formData.append("avatar", file);
+    uploadAvatar(formData);
   };
+
+  function handleRemoveAvatar() {
+    setImage("");
+    deleteAvatar(user?.avatar?.replace(/^http:\/\/localhost:8080\//, ""));
+    const { avatar, ...rest } = user;
+    dispatch(addUser({ ...rest, avatar: null }));
+  }
 
   return (
     <div className="row y-gap-30 items-center">
       <div className="col-auto">
-        {image ? (
+        {user?.avatar || image ? (
           <div className="d-flex ratio ratio-1:1 w-200">
             <Image
               width={200}
               height={200}
-              src={image}
+              src={user?.avatar || image}
               alt="avatar"
               className="img-ratio rounded-4"
             />
             <div className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute">
               <div
                 className="size-40 bg-white rounded-4 flex-center cursor-pointer"
-                onClick={() => setImage("")}
+                onClick={handleRemoveAvatar}
               >
                 <i className="icon-trash text-16" />
               </div>
@@ -63,15 +92,10 @@ const AvatarUploader = () => {
             <Image
               width={200}
               height={200}
-              src="/img/misc/avatar-1.png"
+              src={user?.avatar || "/img/misc/avatar-1.png"}
               alt="image"
               className="img-ratio rounded-4"
             />
-            <div className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute">
-              <div className="size-40 bg-white rounded-4 flex-center cursor-pointer">
-                <i className="icon-trash text-16" />
-              </div>
-            </div>
           </div>
         )}
       </div>
@@ -79,25 +103,29 @@ const AvatarUploader = () => {
       <div className="col-auto">
         <h4 className="text-16 fw-500">Your avatar</h4>
         <div className="text-14 mt-5">
-          PNG or JPG no bigger than 800px wide and tall.
+          PNG or JPG no bigger than 800px wide and tall. <br />
+          To upload new <b>avatar</b> click the <b>trash</b> button <br />
+          Then click <b>Browse</b> button to select new <b>avatar</b>
         </div>
-        <div className="d-inline-block mt-15">
-          <label
-            htmlFor="avatar-upload"
-            role="button"
-            className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
-          >
-            <i className="icon-upload-file text-20 mr-10" />
-            Browse
-          </label>
-          <input
-            type="file"
-            id="avatar-upload"
-            accept="image/png, image/jpeg"
-            onChange={handleImageChange}
-            style={{ display: "none" }}
-          />
-        </div>
+        {(!user?.avatar && !image) && (
+          <div className="d-inline-block mt-15">
+            <label
+              htmlFor="avatar-upload"
+              role="button"
+              className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
+            >
+              <i className="icon-upload-file text-20 mr-10" />
+              Browse
+            </label>
+            <input
+              type="file"
+              id="avatar-upload"
+              accept="image/png, image/jpeg"
+              onChange={handleAvatarUpload}
+              style={{ display: "none" }}
+            />
+          </div>
+        )}
         {error && !success && <div className="text-red-1 mt-1">{error}</div>}
       </div>
     </div>

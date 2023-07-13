@@ -34,6 +34,7 @@ const BookingTable = () => {
   const handleClick = (user) => {
     const { _id, name, username, role } = user;
 
+    const encryptedId = encodeURIComponent(_id);
     const encryptedFirstName = encodeURIComponent(
       name.firstName.replace(" ", "-").toLowerCase()
     );
@@ -43,9 +44,9 @@ const BookingTable = () => {
     const encryptedUsername = encodeURIComponent(username.toLowerCase());
     const encryptedRole = encodeURIComponent(role.toLowerCase());
 
-    const path = `/vendor-dashboard/booking/${_id}?first-name=${encryptedFirstName}&last-name=${encryptedLastName}&username=${encryptedUsername}&user-role=${encryptedRole}`;
+    const path = `?uid=${encryptedId}&first-name=${encryptedFirstName}&last-name=${encryptedLastName}&username=${encryptedUsername}&user-role=${encryptedRole}`;
 
-    router.push(path);
+    router.push(`/dashboard/db-settings/${path}`);
   };
 
   return (

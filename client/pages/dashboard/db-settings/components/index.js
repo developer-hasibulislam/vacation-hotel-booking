@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import PasswordInfo from "./PasswordInfo";
 import LocationInfo from "./LocationInfo";
 import PersonalInfo from "./PersonalInfo";
+import { useRouter } from "next/router";
+import { useGetSingleUserQuery } from "../../../../features/user/userApi";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../../../features/user/userSlice";
 
 const Index = () => {
+  const router = useRouter();
+  const { uid: id } = router.query;
+  const { data } = useGetSingleUserQuery(id);
+  const user = data?.user || {};
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(addUser(user));
+  }, [user]);
+
   const tabs = [
     {
       label: "Personal Information",
-      content: <PersonalInfo />,
+      content: <PersonalInfo user={user} />,
     },
     {
       label: "Location Information",
