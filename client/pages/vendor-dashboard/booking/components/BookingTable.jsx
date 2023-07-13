@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Pagination from "../../common/Pagination";
 import { useGetUserByPaginationQuery } from "../../../../features/user/userApi";
@@ -6,6 +7,7 @@ const BookingTable = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [page, setPage] = useState(1);
   const { data } = useGetUserByPaginationQuery(page);
+  const router = useRouter();
 
   const handleTabClick = ({ index, item }) => {
     setActiveTab(index);
@@ -28,6 +30,23 @@ const BookingTable = () => {
     }
     return true; // Show all users if activeTab is not set
   });
+
+  const handleClick = (user) => {
+    const { _id, name, username, role } = user;
+
+    const encryptedFirstName = encodeURIComponent(
+      name.firstName.replace(" ", "-").toLowerCase()
+    );
+    const encryptedLastName = encodeURIComponent(
+      name.lastName.replace(" ", "-").toLowerCase()
+    );
+    const encryptedUsername = encodeURIComponent(username.toLowerCase());
+    const encryptedRole = encodeURIComponent(role.toLowerCase());
+
+    const path = `/vendor-dashboard/booking/${_id}?first-name=${encryptedFirstName}&last-name=${encryptedLastName}&username=${encryptedUsername}&user-role=${encryptedRole}`;
+
+    router.push(path);
+  };
 
   return (
     <>
@@ -85,7 +104,10 @@ const BookingTable = () => {
                         <div className="row x-gap-10 y-gap-10 items-center">
                           {/* edit */}
                           <div className="col-auto">
-                            <button className="flex-center bg-light-2 rounded-4 size-35">
+                            <button
+                              className="flex-center bg-light-2 rounded-4 size-35"
+                              onClick={() => handleClick(user)}
+                            >
                               <i className="icon-edit text-16 text-light-1" />
                             </button>
                           </div>
