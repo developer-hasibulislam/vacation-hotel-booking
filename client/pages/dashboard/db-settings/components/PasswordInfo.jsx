@@ -40,11 +40,6 @@ const PasswordInfo = () => {
                 Save Changes <div className="icon-arrow-top-right ml-15" />
               </button>
             </div>
-            <div className="col-auto">
-              <button className="button h-50 px-24 -blue-1 bg-blue-1-05 text-blue-1">
-                Cancel
-              </button>
-            </div>
           </div>
         </div>
         {/* End col-12 */}

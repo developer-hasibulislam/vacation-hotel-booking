@@ -26,7 +26,7 @@ const Index = () => {
     },
     {
       label: "Location Information",
-      content: <LocationInfo />,
+      content: <LocationInfo address={user?.address} />,
     },
     {
       label: "Change Password",
