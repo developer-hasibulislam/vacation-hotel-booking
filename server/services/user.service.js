@@ -127,3 +127,25 @@ exports.updateUser = async (req, res) => {
     });
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  const user = await User.findByIdAndDelete(req.query.id);
+
+  // remove the avatar from uploads directory
+  fs.unlink(
+    `./uploads/${user.avatar.replace(/^http:\/\/localhost:8080\//, "")}`,
+    (err) => {
+      if (err) {
+        return res.status(400).json({
+          acknowledgement: true,
+          message: "Internal Error",
+        });
+      } else {
+        return res.status(200).json({
+          acknowledgement: true,
+          message: "User deleted successfully",
+        });
+      }
+    }
+  );
+};

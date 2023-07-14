@@ -14,6 +14,7 @@ const {
   addNewUser,
   getUserOrUsers,
   updateUser,
+  deleteUser,
 } = require("../controllers/user.controller");
 
 const router = express.Router();
@@ -23,6 +24,11 @@ router
   .post(upload.single("avatar"), uploadAvatar)
   .delete(deleteAvatar);
 
-router.route("/").post(addNewUser).get(getUserOrUsers).patch(updateUser);
+router
+  .route("/")
+  .post(addNewUser)
+  .get(getUserOrUsers)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 module.exports = router;

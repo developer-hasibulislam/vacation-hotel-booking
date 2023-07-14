@@ -1,12 +1,16 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Pagination from "../../common/Pagination";
-import { useGetUserByPaginationQuery } from "../../../../features/user/userApi";
+import {
+  useDeleteUserMutation,
+  useGetUserByPaginationQuery,
+} from "../../../../features/user/userApi";
 
 const BookingTable = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [page, setPage] = useState(1);
   const { data } = useGetUserByPaginationQuery(page);
+  const [deleteUser] = useDeleteUserMutation();
   const router = useRouter();
 
   const handleTabClick = ({ index, item }) => {
@@ -114,7 +118,10 @@ const BookingTable = () => {
                           </div>
                           <div className="col-auto">
                             {/* delete */}
-                            <button className="flex-center bg-light-2 rounded-4 size-35">
+                            <button
+                              className="flex-center bg-light-2 rounded-4 size-35"
+                              onClick={() => deleteUser(user?._id)}
+                            >
                               <i className="icon-trash-2 text-16 text-light-1" />
                             </button>
                           </div>
