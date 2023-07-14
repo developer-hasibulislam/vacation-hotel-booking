@@ -55,6 +55,17 @@ const userApi = apiSlice.injectEndpoints({
       query: (page) => `/user/?page=${page}`,
       providesTags: ["User"],
     }),
+
+    // update user
+    updateUser: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `/user/?id=${id}`,
+        method: "PATCH",
+        body,
+      }),
+
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -65,4 +76,5 @@ export const {
   useGetAllUsersQuery,
   useGetSingleUserQuery,
   useGetUserByPaginationQuery,
+  useUpdateUserMutation,
 } = userApi;

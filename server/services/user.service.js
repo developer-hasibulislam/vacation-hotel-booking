@@ -51,7 +51,7 @@ exports.getUserOrUsers = async (req, res) => {
 
     return res.status(200).json({
       acknowledgement: true,
-      message: "User added successfully",
+      message: "User fetched successfully",
       user,
     });
   } else if (req.query.page) {
@@ -101,6 +101,29 @@ exports.getUserOrUsers = async (req, res) => {
       message: "Users fetched successfully",
       total,
       users,
+    });
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  if (req.body.password) {
+    const user = await User.findById(req.query.id);
+    const hashedPassword = await user.encryptPassword(req.body.password);
+    user.password = hashedPassword;
+    await user.save({ validateBeforeSave: false });
+
+    return res.status(200).json({
+      acknowledgement: true,
+      message: "User updated successfully",
+    });
+  } else {
+    await User.findByIdAndUpdate(req.query.id, req.body, {
+      runValidators: true,
+    });
+
+    return res.status(200).json({
+      acknowledgement: true,
+      message: "User updated successfully",
     });
   }
 };

@@ -11,6 +11,7 @@ const {
   deleteAvatar,
   addNewUser,
   getUserOrUsers,
+  updateUser,
 } = require("../services/user.service");
 
 exports.uploadAvatar = async (req, res, next) => {
@@ -52,6 +53,18 @@ exports.addNewUser = async (req, res, next) => {
 exports.getUserOrUsers = async (req, res, next) => {
   try {
     await getUserOrUsers(req, res);
+  } catch (error) {
+    next(error);
+  } finally {
+    console.log(
+      `${req.method}: ${req.protocol}://${req.get("host")}${req.originalUrl}`
+    );
+  }
+};
+
+exports.updateUser = async (req, res, next) => {
+  try {
+    await updateUser(req, res);
   } catch (error) {
     next(error);
   } finally {
