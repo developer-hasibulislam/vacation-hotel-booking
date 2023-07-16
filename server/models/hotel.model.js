@@ -149,6 +149,26 @@ const hotelSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+
+    // 6. Number of people to stay
+    room: {
+      guests: {
+        type: Number,
+        default: 0,
+      },
+      bedrooms: {
+        type: Number,
+        default: 0,
+      },
+      beds: {
+        type: Number,
+        default: 0,
+      },
+      bathrooms: {
+        type: Number,
+        default: 0,
+      },
+    },
   },
   { timestamps: true }
 );
