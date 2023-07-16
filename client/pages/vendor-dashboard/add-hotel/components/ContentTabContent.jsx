@@ -16,6 +16,7 @@ const ContentTabContent = () => {
     beds: hotel?.room?.beds || 0,
     bedrooms: hotel?.room?.bedrooms || 0,
     bathrooms: hotel?.room?.bathrooms || 0,
+    type: hotel?.type || "N/A",
   });
 
   useEffect(() => {
@@ -28,6 +29,40 @@ const ContentTabContent = () => {
       })
     );
   }, [formData, dispatch]);
+
+  const propertyTypes = [
+    "House",
+    "Apartment",
+    "Barn",
+    "Bed & Breakfast",
+    "Boat",
+    "Cabin",
+    "Camper/RV",
+    "Casa Particular",
+    "Castle",
+    "Cave",
+    "Container",
+    "Cycladic Home",
+    "Dammuso",
+    "Dome",
+    "Earth Home",
+    "Farm",
+    "Guesthouse",
+    "Hotel",
+    "Houseboat",
+    "Kezhan",
+    "Minsu",
+    "Riad",
+    "Ryokan",
+    "Sepherd's Hut",
+    "Tent",
+    "Tiny Home",
+    "Tower",
+    "Treehouse",
+    "Trullo",
+    "Windmill",
+    "Yurt",
+  ];
 
   return (
     <>
@@ -107,7 +142,10 @@ const ContentTabContent = () => {
                   required
                   value={formData.bedrooms}
                   onChange={(e) =>
-                    setFormData({ ...formData, bedrooms: Number(e.target.value) })
+                    setFormData({
+                      ...formData,
+                      bedrooms: Number(e.target.value),
+                    })
                   }
                 />
                 <label className="lh-1 text-16 text-light-1">
@@ -124,7 +162,10 @@ const ContentTabContent = () => {
                   required
                   value={formData.bathrooms}
                   onChange={(e) =>
-                    setFormData({ ...formData, bathrooms: Number(e.target.value) })
+                    setFormData({
+                      ...formData,
+                      bathrooms: Number(e.target.value),
+                    })
                   }
                 />
                 <label className="lh-1 text-16 text-light-1">
@@ -132,6 +173,29 @@ const ContentTabContent = () => {
                 </label>
               </div>
             </div>
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="form-label">Property Type*</label>
+                <select
+                  className="form-select"
+                  name="propertyType"
+                  required
+                  value={formData.type}
+                  onChange={(e) => {
+                    setFormData({ ...formData, type: e.target.value });
+                    dispatch(addHotel({ type: e.target.value }));
+                  }}
+                >
+                  <option value="">Select Property Type*</option>
+                  {propertyTypes.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
             {/* End col-6 */}
           </div>
         </div>

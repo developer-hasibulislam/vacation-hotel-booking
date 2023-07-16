@@ -169,7 +169,47 @@ const hotelSchema = new mongoose.Schema(
         default: 0,
       },
     },
+
+    // 7. hotel types
+    type: {
+      type: String,
+      enum: [
+        "House",
+        "Apartment",
+        "Barn",
+        "Bed & Breakfast",
+        "Boat",
+        "Cabin",
+        "Camper/RV",
+        "Casa Particular",
+        "Castle",
+        "Cave",
+        "Container",
+        "Cycladic Home",
+        "Dammuso",
+        "Dome",
+        "Earth Home",
+        "Farm",
+        "Guesthouse",
+        "Hotel",
+        "Houseboat",
+        "Kezhan",
+        "Minsu",
+        "Riad",
+        "Ryokan",
+        "Sepherd's Hut",
+        "Tent",
+        "Tiny Home",
+        "Tower",
+        "Treehouse",
+        "Trullo",
+        "Windmill",
+        "Yurt",
+      ],
+      default: "N/A",
+    },
   },
+
   { timestamps: true }
 );
 
