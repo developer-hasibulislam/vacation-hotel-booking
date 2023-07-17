@@ -16,6 +16,7 @@ const ContentTabContent = () => {
     beds: hotel?.room?.beds || 0,
     bedrooms: hotel?.room?.bedrooms || 0,
     bathrooms: hotel?.room?.bathrooms || 0,
+    
     type: hotel?.type || "N/A",
   });
 
