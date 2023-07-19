@@ -12,7 +12,7 @@ const index = () => {
 
       <div className="header-margin"></div>
 
-      <Header />
+      {/* <Header /> */}
       {/* End dashboard-header */}
 
       <div className="dashboard">
